@@ -169,7 +169,7 @@ body {
 }
 
 .container {
-  width: 320px;
+  width: 340px;
   margin: 0 auto;
 }
 
@@ -186,8 +186,10 @@ body {
   flex-wrap: wrap;
 }
 .header__right .nav {
-  display: none;
+  /* display: none; */
+  
 }
+
 .header__right .nav ul {
   display: flex;
   align-items: center;
@@ -200,10 +202,10 @@ body {
   align-items: center;
 }
 .header__icon .cart-icon {
-  margin-left: 25px;
+  /* margin-left: 25px; */
 }
 .header__icon .search-icon {
-  margin-left: 50px;
+  /* margin-left: 50px; */
 }
 
 /*# sourceMappingURL=styles.css.map */
