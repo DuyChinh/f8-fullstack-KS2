@@ -535,20 +535,20 @@ input#menu__mobile:checked ~ .header__overlay {
     font-size: 4rem;
   }
   .hero__wrapper {
-    position: relative;
     display: flex;
     align-items: center;
   }
   .hero__info {
     text-align: left;
     width: 50%;
-    padding: 217px 111px 217px 170px;
+    padding: 217px 120px 217px 70px;
   }
   .hero__info__desc {
     margin-top: 27px;
-    width: 450px;
+    width: 410px;
   }
   .hero__images {
+    position: relative;
     display: block;
     width: 50vw;
     background: #dcffca;
@@ -558,8 +558,18 @@ input#menu__mobile:checked ~ .header__overlay {
   .hero__img {
     position: absolute;
     top: 50%;
-    left: 60%;
+    left: 18.5%;
     transform: translateX(-50%) translateY(-50%);
+  }
+  .hero__title {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    right: 0;
+    rotate: 90deg;
+    font-size: 15rem;
+    font-weight: 800;
+    color: #216000;
   }
   .heading.lv3 {
     font-size: 3.1rem;
@@ -585,7 +595,7 @@ input#menu__mobile:checked ~ .header__overlay {
   }
   .service__item {
     height: 337px;
-    width: 294px;
+    width: 280px;
     cursor: pointer;
     padding: 34px 32px 58px 34px;
     box-shadow: -5.8333330154px 8.3333330154px 72.5px 0px rgba(54, 54, 54, 0.12);
@@ -610,7 +620,7 @@ input#menu__mobile:checked ~ .header__overlay {
   }
   .service__item-2 {
     height: 392px;
-    width: 342px;
+    width: 320px;
     padding: 60px 35px 86px 34px;
   }
   .service__item-2 .service__item__desc {
@@ -655,6 +665,14 @@ input#menu__mobile:checked ~ .header__overlay {
   .container {
     width: 1200px;
   }
+  .hero__info {
+    padding: 217px 111px 217px 170px;
+  }
+  .hero__title {
+    font-size: 16.7rem;
+    text-align: center;
+    top: 23%;
+  }
   .product__item__title {
     font-size: 2.2rem;
     width: 222px;
@@ -672,6 +690,14 @@ input#menu__mobile:checked ~ .header__overlay {
     height: 270px;
     top: -65%;
     transform: translateY(50%);
+  }
+  .service__item {
+    height: 337px;
+    width: 294px;
+  }
+  .service__item-2 {
+    height: 392px;
+    width: 342px;
   }
 }
 
