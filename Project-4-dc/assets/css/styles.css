@@ -329,6 +329,8 @@ input#menu__mobile:checked ~ .header__overlay {
   gap: 0 5px;
 }
 .service__item {
+  width: 100px;
+  height: 185px;
   border-radius: 4px;
   background: #fff;
   z-index: 1;
@@ -356,12 +358,15 @@ input#menu__mobile:checked ~ .header__overlay {
 }
 .service__item__desc {
   margin-top: 12px;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
 }
 .service__item-2 .service__item__icon {
   background: #f2ffec;
 }
 .service__item-2 {
+  width: 125px;
+  height: 215px;
   padding: 15px 8px;
 }
 .service .circle-top-left,
@@ -384,9 +389,83 @@ input#menu__mobile:checked ~ .header__overlay {
   right: -50px;
 }
 
+.product {
+  padding: 110px 0;
+}
+.product__wrapper {
+  text-align: center;
+}
+.product__group {
+  margin-top: 125px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 171px 10px;
+}
+.product .circle {
+  position: absolute;
+  top: -35%;
+  transform: translateY(50%);
+  width: 150px;
+  height: 150px;
+  background: #ffba94;
+  border-radius: 50%;
+}
+.product__item {
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 1;
+  width: calc(50% - 5px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.product__item__icon {
+  z-index: 1;
+}
+.product__item__title {
+  position: relative;
+  height: 45px;
+  font-weight: 700;
+  font-size: 1.65rem;
+}
+.product__item__title:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 1px;
+  background: #a3a3a3;
+}
+.product__item__number {
+  margin-top: 16px;
+}
+.product__item__price {
+  margin-top: 7px;
+}
+.product__item__price strong {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.product__item .btn {
+  margin-top: 30px;
+  padding: 13px 11px;
+  border-radius: 7px;
+  background: #46b20f;
+  font-weight: 700;
+  color: #fff;
+}
+.product__item__center .circle {
+  background: #c5ffa8;
+}
+
 @media screen and (min-width: 992px) {
   .container {
     width: 940px;
+  }
+  .desc {
+    font-size: 1.6rem;
   }
   .heading {
     color: #2c2c2c;
@@ -468,7 +547,6 @@ input#menu__mobile:checked ~ .header__overlay {
   .hero__info__desc {
     margin-top: 27px;
     width: 450px;
-    font-size: 1.3rem;
   }
   .hero__images {
     display: block;
@@ -483,7 +561,7 @@ input#menu__mobile:checked ~ .header__overlay {
     left: 60%;
     transform: translateX(-50%) translateY(-50%);
   }
-  .lv3 {
+  .heading.lv3 {
     font-size: 3.1rem;
     font-weight: 800;
     line-height: 1.2;
@@ -500,13 +578,14 @@ input#menu__mobile:checked ~ .header__overlay {
     margin: 0 auto;
     width: 643px;
     margin-top: 20px;
-    font-size: 1.3rem;
   }
   .service__group {
     margin-top: 115px;
     gap: 0 21px;
   }
   .service__item {
+    height: 337px;
+    width: 294px;
     cursor: pointer;
     padding: 34px 32px 58px 34px;
     box-shadow: -5.8333330154px 8.3333330154px 72.5px 0px rgba(54, 54, 54, 0.12);
@@ -530,6 +609,8 @@ input#menu__mobile:checked ~ .header__overlay {
     width: 222px;
   }
   .service__item-2 {
+    height: 392px;
+    width: 342px;
     padding: 60px 35px 86px 34px;
   }
   .service__item-2 .service__item__desc {
@@ -543,10 +624,54 @@ input#menu__mobile:checked ~ .header__overlay {
     width: 235px;
     height: 235px;
   }
+  .product__group {
+    margin-top: 225px;
+    gap: 272px 83px;
+  }
+  .product__item {
+    padding-left: 83px;
+    width: calc(33.33% - 83px);
+  }
+  .product__item__title {
+    font-size: 2rem;
+    width: 205px;
+    height: 57px;
+  }
+  .product__item__number, .product__item__price {
+    font-size: 1.6rem;
+  }
+  .product .btn {
+    width: 154px;
+    font-size: 1.43rem;
+  }
+  .product .circle {
+    width: 200px;
+    height: 200px;
+    top: -65%;
+    transform: translateY(50%);
+  }
 }
 @media screen and (min-width: 1200px) {
   .container {
-    width: 1150px;
+    width: 1200px;
+  }
+  .product__item__title {
+    font-size: 2.2rem;
+    width: 222px;
+    height: 57px;
+  }
+  .product__item__number, .product__item__price {
+    font-size: 1.6rem;
+  }
+  .product .btn {
+    width: 154px;
+    font-size: 1.43rem;
+  }
+  .product .circle {
+    width: 270px;
+    height: 270px;
+    top: -65%;
+    transform: translateY(50%);
   }
 }
 
