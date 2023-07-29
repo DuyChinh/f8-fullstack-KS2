@@ -477,6 +477,11 @@ input#menu__mobile:checked ~ .header__overlay {
     display: none;
   }
   .header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.15);
+    z-index: 4;
     padding: 0;
   }
   .header__logo {
@@ -497,6 +502,7 @@ input#menu__mobile:checked ~ .header__overlay {
   }
   .header .nav ul li {
     position: relative;
+    padding: 33px 0;
     margin-right: 50px;
   }
   .header .nav ul li:after {
