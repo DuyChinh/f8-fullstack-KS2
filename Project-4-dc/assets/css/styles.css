@@ -792,22 +792,6 @@ input#menu__mobile:checked ~ .header__overlay {
 }
 
 @media screen and (min-width: 991.98px) {
-  .contact__wrapper {
-    display: flex;
-  }
-  .contact__image {
-    margin-top: -40px;
-    width: 40%;
-  }
-  .contact__image::after {
-    width: 440px;
-    height: 440px;
-  }
-  .contact__info {
-    width: 60%;
-    margin-top: 0;
-    padding-left: 118px;
-  }
   .container {
     width: 940px;
   }
@@ -1005,7 +989,7 @@ input#menu__mobile:checked ~ .header__overlay {
     font-size: 1.6rem;
   }
   .product .btn {
-    width: 154px;
+    min-width: 154px;
     font-size: 1.43rem;
   }
   .product .circle {
@@ -1065,6 +1049,22 @@ input#menu__mobile:checked ~ .header__overlay {
     width: 55px;
     height: 55px;
   }
+  .contact__wrapper {
+    display: flex;
+  }
+  .contact__image {
+    margin-top: -40px;
+    width: 40%;
+  }
+  .contact__image::after {
+    width: 440px;
+    height: 440px;
+  }
+  .contact__info {
+    width: 60%;
+    margin-top: 0;
+    padding-left: 118px;
+  }
 }
 @media screen and (min-width: 1199.98px) {
   .container {
@@ -1086,7 +1086,6 @@ input#menu__mobile:checked ~ .header__overlay {
     font-size: 1.6rem;
   }
   .product .btn {
-    width: 154px;
     font-size: 1.43rem;
   }
   .product .circle {
