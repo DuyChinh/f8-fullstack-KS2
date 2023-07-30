@@ -326,7 +326,7 @@ body {
   display: none;
 }
 .header__right .nav__mobile {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -360,6 +360,8 @@ body {
 }
 .header .nav__mobile__logo {
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 .header__icon {
   display: flex;
