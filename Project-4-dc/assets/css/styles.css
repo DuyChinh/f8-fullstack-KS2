@@ -151,6 +151,8 @@ textarea,
 input,
 button,
 select {
+  font-family: "Inter", sans-serif;
+  color: #2c2c2c;
   outline: none;
   border: none;
   -webkit-tap-highlight-color: transparent;
@@ -382,6 +384,7 @@ input#menu__mobile:checked ~ .header__overlay {
 }
 .service .circle-top-left,
 .service .circle-bottom-right {
+  z-index: -1;
   position: absolute;
   width: 100px;
   height: 100px;
@@ -579,6 +582,7 @@ input#menu__mobile:checked ~ .header__overlay {
 }
 .benefit__desc {
   margin-top: 24px;
+  line-height: 1.2;
 }
 .benefit__list-item::-webkit-scrollbar {
   width: 0;
@@ -628,7 +632,7 @@ input#menu__mobile:checked ~ .header__overlay {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: minmax(190px, auto);
-  gap: 20px 8px;
+  gap: 20px 15px;
 }
 .certification__item__title {
   margin-top: 15px;
@@ -638,9 +642,80 @@ input#menu__mobile:checked ~ .header__overlay {
 .certification__item__desc {
   margin-top: 10px;
   font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.contact {
+  padding: 40px 0 100px 0;
+}
+.contact__image {
+  position: relative;
+}
+.contact__image::after {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  content: "";
+  width: 280px;
+  height: 280px;
+  background: #fff0e7;
+  border-radius: 50%;
+  z-index: -1;
+}
+.contact__info {
+  margin-top: 170px;
+}
+.contact__info__title {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.contact__form {
+  margin-top: 26px;
+}
+.contact__form input,
+.contact__form textarea {
+  margin-top: 22px;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 13.333px 0 13.333px 13.333px;
+  border-radius: 6.667px;
+  border: 0.833px solid #a3a3a3;
+}
+.contact__form__btn {
+  margin-top: 26px;
+  min-width: 128px;
+  padding: 12px 11px;
+  border-radius: 7px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  background: #46b20f;
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+}
+.contact__form__btn:hover, .contact__form__btn:active {
+  opacity: 0.9;
 }
 
 @media screen and (min-width: 991.98px) {
+  .contact__wrapper {
+    display: flex;
+  }
+  .contact__image {
+    margin-top: -40px;
+    width: 40%;
+  }
+  .contact__image::after {
+    width: 440px;
+    height: 440px;
+  }
+  .contact__info {
+    width: 60%;
+    margin-top: 0;
+    padding-left: 118px;
+  }
   .container {
     width: 940px;
   }

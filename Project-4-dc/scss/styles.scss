@@ -3,6 +3,7 @@
 @import "./parts/variable";
 @import "./parts/mixins";
 @import "./parts/font";
+@import "./layouts/footer";
 
 html {
     font-size: 62.5%;
@@ -21,6 +22,8 @@ textarea,
 input,
 button,
 select {
+    font-family: $font;
+    color: $text-color;
     outline: none;
     border: none;
     -webkit-tap-highlight-color: transparent;
@@ -296,6 +299,7 @@ input#menu__mobile:checked ~ .header__overlay {
 
     .circle-top-left,
     .circle-bottom-right {
+        z-index: -1;
         position: absolute;
         width: 100px;
         height: 100px;
@@ -524,6 +528,7 @@ input#menu__mobile:checked ~ .header__overlay {
     padding: 60px 0;
     &__desc {
         margin-top: 24px;
+        line-height: 1.2;
     }
 
     &__list-item::-webkit-scrollbar {
@@ -588,7 +593,7 @@ input#menu__mobile:checked ~ .header__overlay {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: minmax(190px, auto);
-        gap: 20px 8px;
+        gap: 20px 15px;
     }
 
     &__item {
@@ -601,11 +606,96 @@ input#menu__mobile:checked ~ .header__overlay {
         &__desc {
             margin-top: 10px;
             font-size: 1.6rem;
+            line-height: 1.2;
+        }
+    }
+}
+
+.contact {
+    padding: 40px 0 100px 0;
+    &__image {
+        position: relative;
+        // padding: 20px 0;
+    }
+
+    &__image::after {
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        // transform: translateY(-50%);
+        content: "";
+        width: 280px;
+        height: 280px;
+        background: $orange-100;
+        border-radius: 50%;
+        z-index: -1;
+    }
+
+    &__info {
+        margin-top: 170px;
+        &__title {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+    }
+
+    &__form {
+        margin-top: 26px;
+        input,
+        textarea {
+            margin-top: 22px;
+            font-size: 1.6rem;
+            width: 100%;
+            padding: 13.333px 0 13.333px 13.333px;
+            border-radius: 6.667px;
+            border: 0.833px solid $grey-500-main;
+        }
+
+        &__btn {
+            margin-top: 26px;
+            min-width: 128px;
+            padding: 12px 11px;
+            border-radius: 7px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            background: $green-800-main;
+            display: block;
+            margin-left: auto;
+            cursor: pointer;
+        }
+
+        &__btn:hover,
+        &__btn:active {
+            opacity: 0.9;
         }
     }
 }
 
 @media screen and (min-width: 991.98px) {
+    .contact {
+        &__wrapper {
+            display: flex;
+        }
+
+        &__image {
+            margin-top: -40px;
+            width: 40%;
+        }
+
+        &__image::after {
+            width: 440px;
+            height: 440px;
+        }
+
+        &__info {
+            width: 60%;
+            margin-top: 0;
+            padding-left: 118px;
+        }
+    }
+
     .container {
         width: 940px;
     }
