@@ -1,0 +1,115 @@
+.footer {
+    background: $green-100;
+    padding: 30px 20px;
+
+    &__desc {
+        margin-top: 8px;
+        line-height: 1.2;
+    }
+
+    &__item__title {
+        margin-top: 20px;
+        font-weight: 600;
+        color: $green-800-main;
+        line-height: 1.2;
+    }
+
+    &__item {
+        ul {
+            margin-top: 13px;
+        }
+
+        ul li {
+            @include flex;
+            gap: 0 5px;
+        }
+
+        ul li a {
+            display: inline-block;
+            padding: 3px 0;
+            line-height: 1.2;
+        }
+
+        ul li a:hover {
+            text-shadow: 1px 1px 2px #333;
+        }
+    }
+
+    &__seperate {
+        margin-top: 30px;
+        width: 100%;
+        height: 2px;
+        background: $grey-500-main;
+    }
+
+    &__row {
+        margin-top: 24px;
+    }
+
+    &__social {
+        margin-top: 10px;
+        @include flex;
+        gap: 0 7px;
+    }
+
+    &__social-icon {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        background: $green-200;
+        border-radius: 50%;
+        @include dcenter;
+        transform: translateY(0%);
+        transition: all 0.5s ease;
+    }
+
+    &__social-icon:hover,
+    &__social-icon:active {
+        transform: translateY(-30%);
+        color: #fff;
+        background: $green-900;
+    }
+}
+
+@media screen and (min-width: 991.98px) {
+    .footer {
+        &__wrapper {
+            margin: 0 auto;
+            width: 800px;
+        }
+
+        &__desc {
+            // width: 192px;
+        }
+
+        &__list-item {
+            display: flex;
+            gap: 0 70px;
+        }
+
+        &__item {
+            flex: 1;
+        }
+
+        &__seperate {
+            margin-top: 72px;
+        }
+
+        &__row {
+            @include flex;
+            justify-content: space-between;
+        }
+
+        &__social {
+            margin-top: 0;
+        }
+    }
+}
+
+@media screen and (min-width: 1199.98px) {
+    .footer {
+        &__wrapper {
+            width: 940px;
+        }
+    }
+}
