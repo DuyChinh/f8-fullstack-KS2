@@ -294,7 +294,8 @@ body {
 }
 
 .header {
-  padding: 5px 0;
+  position: relative;
+  padding: 35px 0;
 }
 .header__wrapper {
   display: flex;
@@ -303,6 +304,12 @@ body {
 }
 .header .menu__icon {
   font-size: 2.5rem;
+}
+.header__logo {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  left: 50%;
 }
 .header__overlay {
   position: fixed;
@@ -353,8 +360,6 @@ body {
 }
 .header .nav__mobile__logo {
   margin-top: 30px;
-  display: flex;
-  justify-content: center;
 }
 .header__icon {
   display: flex;
