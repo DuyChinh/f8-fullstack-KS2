@@ -30,10 +30,6 @@ select {
     -webkit-tap-highlight-color: transparent;
 }
 
-button {
-    cursor: pointer;
-}
-
 a {
     text-decoration: none;
     color: $text-color;
@@ -407,6 +403,12 @@ input#menu__mobile:checked ~ .header__overlay {
             background: $green-800-main;
             font-weight: 700;
             color: #fff;
+            cursor: pointer;
+        }
+
+        .btn:hover,
+        .btn:active {
+            opacity: 0.9;
         }
     }
 

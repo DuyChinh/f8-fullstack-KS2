@@ -592,6 +592,11 @@ input#menu__mobile:checked ~ .header__overlay {
   background: #46b20f;
   font-weight: 700;
   color: #fff;
+  cursor: pointer;
+}
+.product__item .btn:hover,
+.product__item .btn:active {
+  opacity: 0.9;
 }
 .product__item__center .circle {
   background: #c5ffa8;
