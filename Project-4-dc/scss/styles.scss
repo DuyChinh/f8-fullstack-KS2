@@ -30,6 +30,10 @@ select {
     -webkit-tap-highlight-color: transparent;
 }
 
+button {
+    cursor: pointer;
+}
+
 a {
     text-decoration: none;
     color: $text-color;
