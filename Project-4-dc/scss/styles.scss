@@ -16,6 +16,7 @@ img {
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 textarea,
@@ -675,6 +676,13 @@ input#menu__mobile:checked ~ .header__overlay {
         &__btn:active {
             opacity: 0.9;
         }
+    }
+}
+
+.address {
+    padding-bottom: 50px;
+    iframe {
+        width: 100%;
     }
 }
 
