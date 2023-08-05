@@ -1,0 +1,65 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.headding__chess {
+    margin-left: 140px;
+    color: aquamarine;
+}
+
+#chessTable {
+    display: flex;
+    flex-wrap: wrap;
+    width: 260px;
+    height: 260px;
+    border: 10px solid burlywood;
+    border-radius: 10px;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+
+div {
+    width: 30px;
+    height: 30px;
+}
+
+.heading__multiTable {
+    margin-top: 20px;
+    margin-left: 43%;
+    background: red;
+    color: aqua;
+    width: 180px;
+    border-radius: 999px;
+    text-align: center;
+}
+
+.multiTable {
+    display: flex;
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+    height: 270px;
+}
+
+.multiTable__item {
+    text-align: left;
+    flex: 1;
+    height: 100%;
+    padding: 5px;
+    margin: 8px;
+    background: green;
+    border: 1px solid salmon;
+    color: #fff;
+    line-height: 1.4;
+}
+
+.multiTable__title {
+    text-align: center;
+    color: #333;
+    background: yellow;
+    width: 90px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
