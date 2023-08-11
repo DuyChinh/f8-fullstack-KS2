@@ -123,5 +123,4 @@ function getTotal(n) {
         return 1 / n + getTotal(n - 1);
     }
 }
-
 console.log(`Sum = ${getTotal(5)}`);
