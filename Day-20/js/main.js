@@ -111,14 +111,13 @@ for (var i in arr) {
     } else {
         var html = `
         <div class="item">
-        <div class="info">
+            <div class="info">
                 <p class="title">${arr[i].title}</p>
                 <p class="desc">${arr[i].content}</p>
             </div>
             <div class="image">
                 <img src="${arr[i].src}" alt="">
             </div>
-            
         </div>
     `;
     }
