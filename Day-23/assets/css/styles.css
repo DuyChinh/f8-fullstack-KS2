@@ -217,7 +217,8 @@ input::placeholder {
 
 .error,
 .password-error,
-.alert-account {
+.alert-account,
+.error-name {
     display: none;
     margin-top: 8px;
     font-style: italic;
@@ -267,4 +268,8 @@ input::placeholder {
 
 .form-sign-up__highlight {
     color: blue;
+}
+
+.error-name.show {
+    display: block;
 }

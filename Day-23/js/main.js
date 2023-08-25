@@ -13,11 +13,13 @@ hiddenPassword.addEventListener("click", function () {
     inputPassword.setAttribute("type", "text");
     hiddenPassword.classList.remove("show-password");
 });
+
 var hiddenPass = function () {
     openPassword.classList.remove("show-password");
     hiddenPassword.classList.add("show-password");
     inputPassword.setAttribute("type", "password");
 };
+
 openPassword.addEventListener("click", hiddenPass);
 /*End password */
 signIn.addEventListener("click", function () {
@@ -25,10 +27,28 @@ signIn.addEventListener("click", function () {
 });
 var form = document.querySelector("form");
 var formUp = document.querySelector(".form-2");
+var resetAction = function () {
+    errorName.classList.remove("show");
+    errorSignUp.classList.remove("show-error");
+    passwordErrorSignUp.classList.remove("show-error");
+    nameInput.style.border = "1px solid #ccc";
+    emailSignup.style.border = "1px solid #ccc";
+    passwordSignup.style.border = "1px solid #ccc";
+};
+
+var resetActionIn = function () {
+    error.classList.remove("show-error");
+    passwordError.classList.remove("show-error");
+    alertAccount.classList.remove("show-alert");
+    inputPassword.style.border = "1px solid #ccc";
+    email.style.border = "1px solid #ccc";
+};
 
 overlay.addEventListener("click", function () {
     form.reset();
     formUp.reset();
+    resetAction();
+    resetActionIn();
     // email.value = "";
     // inputPassword.value = "";
     userAction.classList.remove("show");
@@ -102,6 +122,8 @@ signIn.addEventListener("click", function () {
     formSignUp.classList.remove("active");
     signUp.classList.remove("active");
     signIn.classList.add("active");
+    formUp.reset();
+    resetAction();
 });
 
 signUp.addEventListener("click", function () {
@@ -109,6 +131,8 @@ signUp.addEventListener("click", function () {
     formSignUp.classList.add("active");
     signUp.classList.add("active");
     signIn.classList.remove("active");
+    form.reset();
+    resetActionIn();
 });
 /*End form-sign-in */
 var errorSignUp = document.querySelector(".form-sign-up .error");
@@ -146,5 +170,56 @@ passwordSignup.addEventListener("input", function () {
     } else {
         passwordSignup.style.border = "1px solid red";
         passwordErrorSignUp.classList.add("show-error");
+    }
+});
+
+var openPasswordSignUp = document.querySelector(
+    ".form-sign-up .user-enter-password__open"
+);
+var hiddenPasswordSignUp = document.querySelector(
+    ".form-sign-up .user-enter-password__hidden"
+);
+
+hiddenPasswordSignUp.addEventListener("click", function () {
+    openPasswordSignUp.classList.add("show-password");
+    passwordSignup.setAttribute("type", "text");
+    hiddenPasswordSignUp.classList.remove("show-password");
+});
+var hiddenPass = function () {
+    openPasswordSignUp.classList.remove("show-password");
+    hiddenPasswordSignUp.classList.add("show-password");
+    passwordSignup.setAttribute("type", "password");
+};
+openPasswordSignUp.addEventListener("click", hiddenPass);
+
+var nameInput = document.querySelector("#name");
+var errorName = document.querySelector(".error-name");
+var showError = function () {
+    nameInput.style.border = "1px solid red";
+    emailSignup.style.border = "1px solid red";
+    passwordSignup.style.border = "1px solid red";
+    errorName.classList.add("show");
+    errorSignUp.classList.add("show-error");
+    passwordErrorSignUp.classList.add("show-error");
+};
+
+nameInput.addEventListener("input", function () {
+    if (nameInput.value === "") {
+        showError();
+    } else {
+        nameInput.style.border = "1px solid #ccc";
+        errorName.classList.remove("show");
+    }
+});
+
+btnSignUp = document.querySelector(".btn-sign-up");
+btnSignUp.addEventListener("click", submitForm);
+btnSignUp.addEventListener("click", function () {
+    if (
+        nameInput.value === "" ||
+        emailSignup.value === "" ||
+        passwordSignup === ""
+    ) {
+        showError();
     }
 });
