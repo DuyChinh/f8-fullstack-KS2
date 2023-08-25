@@ -164,12 +164,20 @@ emailSignup.addEventListener("input", function () {
 
 passwordSignup.addEventListener("input", function () {
     var passwordValue = passwordSignup.value;
-    if (passwordValue !== "") {
+    if (passwordValue.length === 0) {
+        passwordSignup.style.border = "1px solid red";
+        passwordErrorSignUp.innerText = "Vui lòng nhập thông tin";
+        passwordErrorSignUp.classList.add("show-error");
+    } else if (
+        (passwordValue.length > 0 && passwordValue.length < 6) ||
+        passwordValue.length > 20
+    ) {
+        passwordSignup.style.border = "1px solid red";
+        passwordErrorSignUp.innerText = "Mật khẩu tối thiểu 6 - 20 ký tự";
+        passwordErrorSignUp.classList.add("show-error");
+    } else {
         passwordSignup.style.border = "1px solid #ccc";
         passwordErrorSignUp.classList.remove("show-error");
-    } else {
-        passwordSignup.style.border = "1px solid red";
-        passwordErrorSignUp.classList.add("show-error");
     }
 });
 
