@@ -1,0 +1,105 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+}
+
+input,
+button,
+select,
+textarea {
+    border: none;
+    outline: none;
+    font-family: inherit;
+}
+
+body {
+    background: #8758ff;
+}
+
+.container {
+    margin: 0 auto;
+    width: 450px;
+    height: auto;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #1a1a40;
+    padding: 60px 20px;
+    border-radius: 5px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.action {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #8758ff;
+}
+
+.btn {
+    margin-left: auto;
+    /* width: 20%; */
+    height: 40px;
+    background: #8758ff;
+    padding: 0 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.main-input {
+    /* display: none; */
+    /* margin-top: 20px; */
+    /* width: 80%; */
+    height: 40px;
+    padding: 8px 15px;
+    background: #1a1a40;
+    color: #fff;
+    /* border: 2px solid #8758ff; */
+}
+
+.heading {
+    text-align: center;
+    font-size: 3rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.task {
+    /* width: 430px; */
+    margin-top: 30px;
+    padding: 15px 10px;
+    border-radius: 5px;
+    color: #fff;
+    background: #8758ff;
+    display: flex;
+    align-items: center;
+}
+
+.task .hidden {
+    display: none;
+}
+
+.task-fix {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.task-fix,
+.task-delete {
+    cursor: pointer;
+}
