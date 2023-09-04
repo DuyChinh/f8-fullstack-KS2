@@ -65,11 +65,7 @@ var prevSlide = function () {
 };
 
 prevBtn.addEventListener("click", prevSlide);
-
-var carouselItemsArr = Array.from(carouselItems);
-console.log(carouselItemsArr);
-
-var image = document.querySelector(".item");
+/*slip*/
 var isDown = false;
 var initialPos;
 carouselInner.addEventListener("mousedown", function (e) {
@@ -85,14 +81,11 @@ document.addEventListener("mousemove", function (e) {
         var clientX = e.clientX - initialPos;
         var current = Math.abs(position / widthItem);
         carouselInner.style.translate = `${-(current * widthItem - clientX)}px`;
-        console.log(clientX);
         var rate = clientX / widthItem;
-        console.log(rate);
         if (rate <= -0.1) {
             isDown = false;
             nextSlide();
         }
-        console.log(position);
         if (rate >= 0.1) {
             isDown = false;
             prevSlide();
@@ -105,7 +98,8 @@ document.addEventListener("mouseup", function (e) {
     carouselInner.style.cursor = "default";
     let clientX = e.clientX - initialPos;
     var current = Math.abs(position / widthItem);
-    if (clientX / widthItem > -0.1 || clientX / widthItem < 0.1) {
+    var rate = clientX / widthItem;
+    if (rate > -0.1 || rate < 0.1) {
         carouselInner.style.translate = `-${current * widthItem}px`;
     }
 });
