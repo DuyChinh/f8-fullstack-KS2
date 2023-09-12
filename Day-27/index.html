@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day-27</title>
+    <style>
+        .btn {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            border: 1px solid #333;
+            background: #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+
+        <h3>DANH SÁCH SẢN PHẨM</h3>
+        <table cellpadding="0" cellspacing ="0" width="100%" border="1" id="product_table">
+            <thead>
+                <tr>
+                    <th width="5%">STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th width="10%">Giá</th>
+                    <th width="10%">Thêm vào giỏ</th>
+                </tr>
+            </thead>
+    
+        </table>
+        <h3>GIỎ HÀNG</h3>
+        <table cellpadding="0" cellspacing ="0" width="100%" border="1" id="cart_table"></table>
+        <!-- <p class="status-cart">Giỏ hàng không có sản phẩm</p> -->
+        <div class="cart-show"></div>
+    </main>
+    <script src="./js/main.js"></script>
+</body>
+</html>
