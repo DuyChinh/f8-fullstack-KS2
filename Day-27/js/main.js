@@ -54,6 +54,11 @@ var render = function() {
         productItem.innerHTML = html;
         productTable.appendChild(productItem);
     });
+    // var btn = document.querySelector(".btn");
+    // var showStatus = document.querySelector(".status-cart");
+    // btn.addEventListener("click", function() {
+    //     showStatus.classList.add("hidden");
+    // });
     var btns = document.querySelectorAll(".btn");
     // console.log(btns);
 
