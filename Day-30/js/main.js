@@ -45,7 +45,8 @@ content.addEventListener("input", function() {
     } else {
         var cntChar = content.textContent.length;
         char.innerText = cntChar;
-        var words = content.textContent.trim().split(/\s+/);
+        var contentE = content.textContent.trim();
+        var words = content.split(/\s+|\n/);
         console.log(words);
         word.innerText = words.length;
     }
