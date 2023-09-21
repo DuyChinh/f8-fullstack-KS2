@@ -1,23 +1,36 @@
-// var textarea = document.querySelector("#text-area");
-var btnStrong = document.querySelector(".btn-strong");
-var btnItalic = document.querySelector(".btn-italic");
-var btnUnderline = document.querySelector(".btn-underline");
+
 var btnColor = document.querySelector(".btn-color");
 var content = document.querySelector("#content");
 var downloadFile = document.querySelector(".download-file");
 var typeOfFile = document.querySelector(".type-file");
+var btnNew = document.querySelector(".btn-new");
 
-btnStrong.addEventListener("click", function() {
-    document.execCommand("bold");
-});
+btnNew.addEventListener("click", function() {
+    content.innerText = "";
+})
 
-btnItalic.addEventListener("click", function() {
-    document.execCommand("italic");
-});
+// var btnRight
+var btnAction = document.querySelector(".btn-action");
+var buttons = btnAction.querySelectorAll("button");
+console.log(buttons);
 
-btnUnderline.addEventListener("click", function() {
-    document.execCommand("underline");
-});
+buttons.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        document.execCommand(btn.id);
+        if(btn.classList.contains("active")) {
+            btn.classList.remove("active");
+        } else {
+            btn.classList.add("active");
+        }
+    })
+})
+
+content.addEventListener("keydown", function(e) {
+    if (e.key === "Tab") {
+        e.preventDefault();
+        document.execCommand("insertText", false, "\t");
+    }
+  });
 
 btnColor.addEventListener("change", function() {
     document.execCommand("foreColor", false, btnColor.value);
@@ -25,8 +38,11 @@ btnColor.addEventListener("change", function() {
 
 downloadFile.addEventListener("click", function(e) {
     e.stopPropagation();
-    typeOfFile.classList.add("show");
-    
+    if(typeOfFile.classList.contains("show")) {
+        typeOfFile.classList.remove("show");
+    } else {
+        typeOfFile.classList.add("show");
+    }
 });
 
 document.body.addEventListener("click", function() {
@@ -36,7 +52,8 @@ document.body.addEventListener("click", function() {
 var char = document.querySelector(".char span");
 var word = document.querySelector(".word span");
 var cntChar = 0, cntWord = 0;
-content.addEventListener("input", function() {
+content.addEventListener("input", function(e) {
+    console.log(e);
     if(content.textContent == "") {
         cntChar = 0;
         cntWord = 0;
@@ -45,9 +62,8 @@ content.addEventListener("input", function() {
     } else {
         var cntChar = content.textContent.length;
         char.innerText = cntChar;
-        var contentE = content.textContent.trim();
-        var words = content.split(/\s+|\n/);
-        console.log(words);
+        var contentE = content.innerText.trim();
+        var words = contentE.split(/\s+|\n/);
         word.innerText = words.length;
     }
 });

@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Editor</title>
     <!-- <link rel="stylesheet" href="./css/reset.css"> -->
     <link rel="stylesheet" href="./css/styles.css">
@@ -28,9 +45,13 @@
                     <input type="text"name="title" class="title" value="untitled">
                 </div>
                 <div class="btn-action">
-                    <button class="btn-strong"><b>B</b></button>
-                    <button class="btn-italic"><i>I</i></button>
-                    <button class="btn-underline"><u>U</u></button>
+                    <button id="strikeThrough" class="strike-through"><i class="fa-solid fa-strikethrough"></i></button>
+                    <button id="justifyLeft" class="btn-left"><i class="fa-solid fa-align-left"></i></button>
+                    <button id="justifyCenter" class="btn-center"><i class="fa-solid fa-align-center"></i></button>
+                    <button id="justifyRight" class="btn-left"><i class="fa-solid fa-align-right"></i></button>
+                    <button id="bold" class="btn-strong"><b>B</b></button>
+                    <button id="italic" class="btn-italic"><i>I</i></button>
+                    <button id="underline" class="btn-underline"><u>U</u></button>
                     <input type="color" class="btn-color">
                 </div>
             </div>
