@@ -9,10 +9,15 @@ btnNew.addEventListener("click", function() {
     content.innerText = "";
 })
 
-// var btnRight
+
 var btnAction = document.querySelector(".btn-action");
 var buttons = btnAction.querySelectorAll("button");
-console.log(buttons);
+
+
+
+window.addEventListener("load", function() {
+    content.focus();
+});
 
 buttons.forEach(function(btn) {
     btn.addEventListener("click", function() {
