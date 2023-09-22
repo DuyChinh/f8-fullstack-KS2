@@ -26,20 +26,35 @@ btnNew.addEventListener("click", function() {
     word.innerText = 0;
 })
 
+var justify = document.querySelector(".justify");
+var btnJustifys = Array.from(justify.children);
+
+
+
 var btnAction = document.querySelector(".btn-action");
 var buttons = btnAction.querySelectorAll("button");
-
-
+var currentBtn;
 buttons.forEach(function(btn) {
     btn.addEventListener("click", function() {
-        document.execCommand(btn.id);
-        if(btn.classList.contains("active")) {
-            btn.classList.remove("active");
+        if(btn.id !== "indent" && btn.id !== "outdent") {
+            document.execCommand(btn.id);
+            if(btn.classList.contains("active")) {
+                btn.classList.remove("active");
+            } else {
+                if(btn.id === "justifyFull" || btn.id === "justifyLeft" || btn.id === "justifyRight" || btn.id === "justifyCenter") {
+                    for(var i = 0; i < btnJustifys.length; i++) {
+                        btnJustifys[i].classList.remove("active");
+                    }
+                }
+                btn.classList.add("active");
+            }
         } else {
-            btn.classList.add("active");
+            document.execCommand(btn.id);
         }
     })
-})
+});
+
+
 
 content.addEventListener("keydown", function(e) {
     if (e.key === "Tab") {
@@ -69,7 +84,7 @@ var char = document.querySelector(".char span");
 var word = document.querySelector(".word span");
 var cntChar = 0, cntWord = 0;
 content.addEventListener("input", function(e) {
-    console.log(e);
+    // console.log(e);
     if(content.textContent == "") {
         cntChar = 0;
         cntWord = 0;

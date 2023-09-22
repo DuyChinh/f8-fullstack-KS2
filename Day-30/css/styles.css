@@ -196,3 +196,27 @@ select#fontSize {
     border-radius: 4px;
     border: 1px solid salmon;
 }
+
+.justify {
+    display: flex;
+    gap: 10px;
+}
+
+#undo:hover {
+    background: linear-gradient(to right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: blue;
+}
+
+#redo:hover {
+    background: linear-gradient(to right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: blue;
+}
+
+#indent:hover {
+    background: linear-gradient(to right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: blue;
+}
+#outdent:hover {
+    background: linear-gradient(to right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: blue;
+}
