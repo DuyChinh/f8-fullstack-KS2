@@ -19,7 +19,6 @@ fontSize.addEventListener("change", function() {
     document.execCommand(fontSize.id, false, selectFont);
 })
 
-
 btnNew.addEventListener("click", function() {
     content.innerText = "";
     char.innerText = 0;
@@ -36,8 +35,8 @@ var buttons = btnAction.querySelectorAll("button");
 var currentBtn;
 buttons.forEach(function(btn) {
     btn.addEventListener("click", function() {
+        document.execCommand(btn.id);
         if(btn.id !== "indent" && btn.id !== "outdent") {
-            document.execCommand(btn.id);
             if(btn.classList.contains("active")) {
                 btn.classList.remove("active");
             } else {
@@ -48,9 +47,7 @@ buttons.forEach(function(btn) {
                 }
                 btn.classList.add("active");
             }
-        } else {
-            document.execCommand(btn.id);
-        }
+        } 
     })
 });
 
