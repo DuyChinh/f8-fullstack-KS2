@@ -1,23 +1,34 @@
+window.addEventListener("load", function() {
+    content.focus();
+});
 
 var btnColor = document.querySelector(".btn-color");
 var content = document.querySelector("#content");
 var downloadFile = document.querySelector(".download-file");
 var typeOfFile = document.querySelector(".type-file");
 var btnNew = document.querySelector(".btn-new");
+var selectOption = document.querySelector("#fontName");
+var fontSize= document.querySelector("#fontSize");
+selectOption.addEventListener("change", function() {
+    var selectFont = selectOption.value;
+    document.execCommand(selectOption.id, false, selectFont);
+})
+
+fontSize.addEventListener("change", function() {
+    var selectFont = fontSize.value;
+    document.execCommand(fontSize.id, false, selectFont);
+})
+
 
 btnNew.addEventListener("click", function() {
     content.innerText = "";
+    char.innerText = 0;
+    word.innerText = 0;
 })
-
 
 var btnAction = document.querySelector(".btn-action");
 var buttons = btnAction.querySelectorAll("button");
 
-
-
-window.addEventListener("load", function() {
-    content.focus();
-});
 
 buttons.forEach(function(btn) {
     btn.addEventListener("click", function() {

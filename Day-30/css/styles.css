@@ -27,6 +27,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    opacity: 0.9;
+}
+
 .main {
     margin-top: 20px;
 }
@@ -47,6 +51,7 @@ button {
     color: yellow;
 }
 
+
 #content {
     padding: 20px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -57,11 +62,14 @@ button {
     background: #fff;
 }
 
+
 .action {
     margin-top: 15px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 10px;
+    /* justify-content: space-between; */
 }
 
 .btn-action button {
@@ -76,9 +84,6 @@ button {
     cursor: pointer;
 }
 
-.btn-italic, .btn-underline, .btn-strong:hover {
-    opacity: 0.8;
-}
 
 input.title {
     padding: 10px 5px;
@@ -91,10 +96,6 @@ input.title {
     background: rgba(255, 0, 0, 0.932);
     color: #fff;
     font-size: 1.6rem;
-}
-
-.download-file:hover {
-    opacity: 0.8;
 }
 
 .btn-action {
@@ -173,4 +174,25 @@ input.title {
 button.active {
     background: linear-gradient(to right, rgb(252, 74, 26), rgb(247, 183, 51));
     color: blue;
+}
+
+#undo.active, #redo.active {
+    background: #000;
+    color: #fff;
+}
+
+select#fontName {
+    width: 100px;
+    padding: 10px 4px;
+    border-radius: 4px;
+    border: 1px solid salmon;
+    color: #333;
+    font-weight: 700;
+}
+
+select#fontSize {
+    width: 45px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    border: 1px solid salmon;
 }
