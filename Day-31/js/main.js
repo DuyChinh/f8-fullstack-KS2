@@ -19,7 +19,11 @@ function countdown(seconds) {
         if(remaining === 0) {
             btn.style.cursor = "pointer";
             btn.classList.remove("hidden");
-            action();
+            
+            btn.addEventListener("click", function(e) {
+              window.location = "https://chinh.io.vn";
+            });
+  
         }
       }
     }
@@ -43,8 +47,3 @@ function countdown(seconds) {
   
   countdown(10); // Bắt đầu đếm ngược từ 30 giây
 
-
-btn.addEventListener("click", function(e) {
-  window.location = "https://chinh.io.vn";
-});
-  
