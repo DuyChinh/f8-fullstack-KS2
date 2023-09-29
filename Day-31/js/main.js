@@ -11,7 +11,6 @@ function countdown(seconds) {
       remaining = seconds - elapsed;
   
       if (remaining >= 0) {
-        // console.log(remaining); // Thay thế dòng này bằng hành động bạn muốn thực hiện sau mỗi giây
         countDown.innerText = `${remaining}`;
         if (remaining > 0) {
           requestId = requestAnimationFrame(handleFrame);
@@ -30,20 +29,18 @@ function countdown(seconds) {
   
     function update() {
       if (document.visibilityState === 'visible') {
-        start = performance.now() - (elapsed * 1000); // Cập nhật thời điểm bắt đầu dựa trên thời gian đã trôi qua trước đó
+        start = performance.now() - (elapsed * 1000); 
         requestId = requestAnimationFrame(handleFrame);
       } else {
-        cancelAnimationFrame(requestId); // Hủy yêu cầu requestAnimationFrame nếu trạng thái hiển thị là 'hidden'
+        cancelAnimationFrame(requestId); 
       }
     }
   
     update();
-  
-    // Lắng nghe sự kiện visibilitychange
     document.addEventListener('visibilitychange', update);
   }
   
-//   countdown(30); // Bắt đầu đếm ngược từ 30 giây
+countdown(30); 
   
-  countdown(10); // Bắt đầu đếm ngược từ 30 giây
+
 
