@@ -12,10 +12,12 @@ class F8 {
                     add.append(templateEL.content.cloneNode(true));
                     // console.log(add);
                     if(name === "counter-app") {
+                        // console.log(this);
                         this.data = objs.data();
                         // console.log(this.data);
-                        add.querySelector(".title").textContent= this.data.title;
-                        // add.querySelector(".count").textContent = this.data.count;
+                        add.querySelector("h2").textContent= this.data.title;
+                        // const countEL = add.querySelector(".count");
+                        this.handleString();
                         this.actionClick();
                     
                     }
@@ -23,7 +25,7 @@ class F8 {
             }
             
             actionClick() {
-                const countEL = add.querySelector(".count");
+                const countEL = add.querySelector("h3");
                 const btns = add.querySelectorAll("button");
                 // console.log(btns);
                 const regex = /v-on:(\w+)="(\w+.*?)"/;
@@ -37,15 +39,9 @@ class F8 {
                         eval(`this.data.` + value);
                         // const countEL = add.querySelector(".count");
                         // console.log(countEL);
-                        console.log(countEL.textContent);
+                        // console.log(countEL.textContent);
                         if(countEL.textContent.indexOf("{") !== -1) {
-                            const arrCount = countEL.textContent.split(/({{ count }})/);
-                            console.log(arrCount);
-                            arrCount[1] = this.data.count;
-                            var renderString = arrCount.join("");
-                            // console.log(renderString);
-                            // console.log(arrCount.join(""));
-                            countEL.innerText = renderString;
+                            this.handleString();
                         } else {
                             const arrCount = countEL.textContent.split(" ");
                             arrCount[2] = this.data.count;
@@ -53,11 +49,19 @@ class F8 {
                             countEL.innerText = renderString;
                         }
                         // renderString = "";
-                        const titleEl = add.querySelector(".title");
+                        const titleEl = add.querySelector("h2");
                         titleEl.textContent = this.data.title;
                     });
                 });
                
+            }
+
+            handleString() {
+                const countEL = add.querySelector("h3");
+                const arrCount = countEL.textContent.split(/({{ count }})/);
+                arrCount[1] = this.data.count;
+                var renderString = arrCount.join("");
+                countEL.innerText = renderString;
             }
       
         }
