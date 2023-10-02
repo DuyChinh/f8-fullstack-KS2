@@ -1,0 +1,58 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.speech-wrapper {
+    margin-top: 40px;
+}
+
+.speech-wrapper .heading {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.speech-wrapper .btn {
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 30px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(235, 51, 73), rgb(244, 92, 67));
+    padding: 10px 20px;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.speech-wrapper .btn:hover {
+    background: linear-gradient(to right, rgb(29, 151, 108), rgb(147, 249, 185));
+}
+
+.speech-wrapper .status {
+    margin-top: 20px;
+    color: red;
+    font-weight: 600;
+}
+
+.speech-wrapper .status-action {
+    display: none;
+    text-align: center;
+    margin: 20px auto;
+    border: 1px solid green;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 8px;
+}
