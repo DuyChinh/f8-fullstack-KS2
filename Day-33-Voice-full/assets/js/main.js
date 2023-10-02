@@ -113,5 +113,22 @@ recognition.addEventListener("result", (e) => {
     statusVoice.style.color = "green";
 });
 
+//Guide
+const toggle = speechWrapper.querySelector(".toggle");
+const guideSearch = speechWrapper.querySelector(".guide-search ");
+const guideBlock = speechWrapper.querySelector(".guide-block ");
+const btnGuide = speechWrapper.querySelector(".btn-guide");
+
+toggle.addEventListener("click", () => {
+    // guideBlock.style.display = "none";
+    guideBlock.style.translate = "-100% 0";
+});
+
+btnGuide.addEventListener("click", () => {
+    // guideSearch.style.translate = "0 0";
+    // toggle.style.translate = "0 0";
+    guideBlock.style.translate = "0 0";
+})
+
 
 
