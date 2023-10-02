@@ -12,7 +12,7 @@ if(SpeechRecognition) {
 
     const standardString= (content, mark) => {
         let res = "";
-        const arr = content.split(" ");
+        const arr = content.split("/\s+/");
         if(arr.length < 2) {
             return content;
         }
@@ -72,7 +72,10 @@ if(SpeechRecognition) {
                 break;
             default:
                 const resGg = standardString(text, '+');
-                window.open(`https://www.google.com.vn/search?q=${resGg}`);
+                if(resGg !== 'youtube') {
+                    window.open(`https://www.google.com.vn/search?q=${resGg}`);
+                    console.log(resGg);
+                }
                 break;
         }
 
@@ -105,7 +108,7 @@ if(SpeechRecognition) {
         // console.log(e);
         // console.log("result", e);
         const res = e.results[0][0].transcript;
-        const text = res.toLowerCase();
+        const text = res.toLowerCase().replaceAll(/[.,!?$%#&-+<>]/g, "");
         // console.log(text);
         statusAction.innerHTML = `<p>Đang thực hiện: <span>${text}</span></p>`;
         statusAction.style.display = "block";
