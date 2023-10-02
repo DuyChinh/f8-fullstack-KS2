@@ -59,7 +59,7 @@ const handleVoice = (text) => {
                 const res = standardString(content, "%20");
                 window.open(`https://www.google.com/maps/search/${res}`);
             } else if(text.indexOf("đường") >= 0) {
-                let content = text.slice(text.indexOf("đường")+5).trim();
+                const content = text.slice(text.indexOf("đường")+5).trim();
                 const res = standardString(content, "%20");
                 window.open(`https://www.google.com/maps/search/${res}`);
             }
@@ -70,12 +70,11 @@ const handleVoice = (text) => {
             window.open(`https://zingmp3.vn/tim-kiem/tat-ca?q=${res}`);
             break;
         default:
-            check = false;
-            statusAction.textContent = `Không được bạn ơi, xin hãy thử lại`;
+            const resGg = standardString(text, '+');
+            window.open(`https://www.google.com.vn/search?q=${resGg}`);
             break;
     }
 
-    if(check)
         statusAction.textContent = `Đã thực hiện xong`;
 
 }
@@ -113,7 +112,6 @@ recognition.addEventListener("result", (e) => {
     statusVoice.textContent = "Đã nói xong. Hy vọng kết quả như ý bạn muốn";
     statusVoice.style.color = "green";
 });
-
 
 
 
