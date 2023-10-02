@@ -71,6 +71,10 @@ body {
     .speech-wrapper .heading {
         font-size: 3rem;
     }
+
+    .speech-wrapper .guide-search {
+        width: 80%;
+    }
 }
 
 .speech-wrapper .btn-guide {
@@ -106,6 +110,7 @@ body {
 }
 
 .guide-search {
+    width: 40%;
     z-index: 99;
     /* display: none; */
     /* translate: -100% 0; */
