@@ -58,3 +58,17 @@ body {
     border-radius: 8px;
     font-size: 1.7rem;
 }
+
+.status-action p span {
+    color: blueviolet;
+}
+
+@media screen and (max-width: 450px) {
+    .container {
+        width: 350px;
+    }
+
+    .speech-wrapper .heading {
+        font-size: 3rem;
+    }
+}

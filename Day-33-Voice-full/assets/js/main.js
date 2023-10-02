@@ -103,7 +103,7 @@ recognition.addEventListener("result", (e) => {
     const res = e.results[0][0].transcript;
     const text = res.toLowerCase();
     // console.log(text);
-    statusAction.textContent = `Đang thực hiện: ${text}`;
+    statusAction.innerHTML = `<p>Đang thực hiện: <span>${text}</span></p>`;
     statusAction.style.display = "block";
     setTimeout(()=> {
         handleVoice(text);
