@@ -148,7 +148,7 @@ button {
     width: 100%;
 }
 
-.to-do-list .Todo {
+ .Todo {
     margin-top: 20px;
     background: #fff;
     box-shadow: 0 1px 3px 0 #333;
@@ -160,11 +160,11 @@ button {
     gap: 10px;
 }
 
-.to-do-list .Todo.hidden {
+ .Todo.hidden {
     display: none;
 }
 
-.to-do-list .Todo .btn-delete {
+ .Todo .btn-delete {
     background: #be123c;
     width: 40px;
     height: 40px;
@@ -172,7 +172,7 @@ button {
     color: #fff;
 }
 
-.to-do-list .Todo .btn-edit {
+ .Todo .btn-edit {
     background: #1d4ed8;
     width: 40px;
     height: 40px;
@@ -186,4 +186,18 @@ button {
     height: 40px;
     border-radius: 8px;
     color: #fff;
+}
+
+.to-do-list-completed .Todo {
+    margin-top: 20px;
+}
+
+.to-do-completed {
+    margin-top: 20px;
+    width: 25%;
+    background: #047857;
+    text-align: center;
+    color: #fff;
+    padding: 12px;
+    border-radius: 7px;
 }

@@ -30,7 +30,7 @@ const postTask = async(doName) => {
 
 btnSave.addEventListener("click", (e) => {
   todoBlock.style.display = "none";
-  const doName = inputAddTodo.value;
+  const doName = inputAddTodo.value.replace(/<>/g, "");
   if(doName) {
     postTask(doName);
     // cnt++;
@@ -70,14 +70,36 @@ const handleDelete = async (id) => {
 };
 
 const handleUpdate = async (id, doName) => {
-  const { response } = await client.put(`/tasks/${id}`);
+  const { response } = await client.put(`/tasks/${id}`, 
+  {
+    name: doName,
+    completed: false,
+  });
   renderTodos();
 }
+const todoListCompleted = document.querySelector(".to-do-list-completed");
 
 const handleCompleted = async(index) =>  {
   const {data: tasks} = await client.get("/tasks");
-  // tasks[index].completed = !tasks[index].completed;
-  // console.log(tasks[index].completed);
+  const html = tasks
+    .map((todo) => {
+      if(+index === +todo.id) {
+        return `
+          <div class="Todo" data-index="${todo.id}">
+              <p class="${todo.completed ? "completed" : ""} name-todo">${
+          todo.name
+        }</p>
+              <div>
+                <button data-type="remove" class="btn-delete"><i class="fa-regular fa-trash-can"></i></button>
+                <button data-type="update" class="btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button data-type="completed" class="btn-completed"><i class="fa-solid fa-square-check"></i></button>  
+              </div>
+          </div>
+          `;
+      }
+    })
+    .join("");
+  todoListCompleted.innerHTML += html;
 }
 
 toDoList.addEventListener("click", (e) => {
@@ -97,7 +119,7 @@ toDoList.addEventListener("click", (e) => {
 
   if(type == "update") {
     todoBlock.style.display = "block";
-    console.log(index);
+    // console.log(index);
     btnSave.addEventListener("click", (e)=> {
      
       // console.log(index);
@@ -111,10 +133,38 @@ toDoList.addEventListener("click", (e) => {
      todoEl = e.target.parentElement.parentElement;
     //  console.log(todoEl);
      index = todoEl.dataset.index;
-     handleCompleted(index);
+    console.log(index);
+     handleCompleted(+index);
+    
    }
-})
+});
 
+// todoListCompleted.addEventListener("click", (e) => {
+//   var type;
+//   var todoEl;
+//   if(e.target.localName == "button") {
+//     type =  e.target.dataset.type;
+//     todoEl = e.target.parentElement.parentElement;
+//   } else if(e.target.localName == "i") {
+//     type =  e.target.parentElement.dataset.type;
+//     todoEl = e.target.parentElement.parentElement.parentElement;
+//   }
+//   var index = todoEl.dataset.index;
+//   if(type == "remove") {
+//     handleRemove(index);
+//   }
+
+//   if(type == "update") {
+//     todoBlock.style.display = "block";
+//     console.log(index);
+//     btnSave.addEventListener("click", (e)=> {
+     
+//       // console.log(index);
+//       handleDelete(index);
+//       handleUpdate(index, inputAddTodo.value);
+//     });
+// }
+// });
 //Search
 const btnSearch = document.querySelector("#search");
 
