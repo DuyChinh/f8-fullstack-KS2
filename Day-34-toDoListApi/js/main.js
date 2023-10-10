@@ -117,7 +117,6 @@ var showFormUpdate = function(todoEl) {
 
 todoForm.addEventListener("submit", function(e) {
     e.preventDefault();
-   
     var nameEL = this.querySelector(".todo-input");
     var doName = nameEL.value;
     if(!doName) {
