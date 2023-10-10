@@ -46,9 +46,9 @@ const renderTodos = async () => {
   const html = tasks.map((todo) => {
     return `
         <div class="Todo" data-index="${todo.id}">
-            <p data-type="completed" class="${
+            <p class="${
               todo.completed ? "completed" : ""
-            }">${todo.name}</p>
+            } name-todo">${todo.name}</p>
             <div>
               <button data-type="remove" class="btn-delete"><i class="fa-regular fa-trash-can"></i></button>
               <button data-type="update" class="btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -74,6 +74,12 @@ const handleUpdate = async (id, doName) => {
   renderTodos();
 }
 
+const handleCompleted = async(index) =>  {
+  const {data: tasks} = await client.get("/tasks");
+  // tasks[index].completed = !tasks[index].completed;
+  // console.log(tasks[index].completed);
+}
+
 toDoList.addEventListener("click", (e) => {
   var type;
   var todoEl;
@@ -97,8 +103,30 @@ toDoList.addEventListener("click", (e) => {
       // console.log(index);
       handleDelete(index);
       handleUpdate(index, inputAddTodo.value);
-      
     });
     
   }
+
+   if (type == "completed") {
+     todoEl = e.target.parentElement.parentElement;
+    //  console.log(todoEl);
+     index = todoEl.dataset.index;
+     handleCompleted(index);
+   }
+})
+
+//Search
+const btnSearch = document.querySelector("#search");
+
+btnSearch.addEventListener("input", (e)=> {
+  const info = e.target.value.toLowerCase();
+  const todoList = document.querySelectorAll(".Todo");
+  todoList.forEach((todo) => {
+    const name = todo.querySelector(".name-todo").textContent.toLowerCase();
+    if(name.indexOf(info) === -1) {
+      todo.classList.add("hidden");
+    } else {
+      todo.classList.remove("hidden");
+    }
+  });
 })
