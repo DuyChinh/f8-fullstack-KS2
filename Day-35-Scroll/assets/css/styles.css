@@ -14,13 +14,149 @@ body {
     background: #000;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000;
+    /* Đặt màu sắc của thanh cuộn */
+}
+
+.header-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* height: 30px; */
+    padding: 10px 60px;
+    width: 100%;
+    background: #242526;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.fa-facebook {
+    margin-left: -30px;
+    margin-right: 20px;
+    color: #fff;
+    font-size: 3.6rem;
+}
+
+.header-fix .search {
+    outline: none;
+    border: none;
+    background: #ccc;
+    padding: 15px;
+    border-radius: 99px;
+}
+
+.header-fix .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header-fix .action-fb {
+    margin-left: 130px;
+    display: flex;
+    gap: 105px;
+}
+
+.header-fix .action-fb svg {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+}
+
+.header-fix .main-action {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
+
+.header-fix .main-action svg {
+    color: #fff;
+}
+
+.header-fix .main-action .block-action {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #3a3b3c;
+}
+
+.menu {
+    padding: 0px 25px;
+    height: 100%;
+    width: 30%; 
+    position: fixed;
+    top: 65px;
+    left: 0;
+    background: #000;
+    /* padding-left: 25px; */
+    /* height: 300px;
+    width: 200px; */
+}
+
+.list-item {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    /* gap: 20px; */
+}
+
+.menu .item {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.menu .item img {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.menu .seperate {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: #333;
+    margin: 10px 0;
+}
+
+.menu .heading-item {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+
+.user {
+    margin-left: 400px;
+}
+
 .container {
     width:900px;
-    margin: 0 auto;
+    margin: 0px auto;
 }
 
 .wrapper {
-    margin-top: 30px;
+    margin-top: 80px;
 }
 
 .wrapper .header {
@@ -67,16 +203,18 @@ body {
     padding: 10px 0;
 }
 /* animation */
-.loader.show {
-  width: 320px;
-  height: 150px;
-  display: block;
-  margin: auto;
+.loader {
+  display: none;
+  width: 540px;
+  min-height: 400px;
+  /* height: 150px; */
+  /* display: block; */
+  /* margin: auto; */
   position: relative;
   background: #FFF;
   box-sizing: border-box;
 }
-.loader.show::after {
+.loader::after {
   content: '';  
   width: calc(100% - 30px);
   height: calc(100% - 30px);
