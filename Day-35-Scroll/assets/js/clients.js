@@ -1,5 +1,5 @@
 //Built Http Client
-const SERVER_API = "http://localhost:3000";
+const SERVER_API = "https://wqlnzg-8080.csb.app";
 export const client = {
   send: async (url, method = "GET", body = null) => {
     url = SERVER_API + url;
