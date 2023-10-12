@@ -1,6 +1,9 @@
 //handle scroll
 import { client } from "./clients.js";
 
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".loader").style.display = "block";
+})
 
 window.onload = () => {
   document.querySelector(".loader").style.display = "block";
