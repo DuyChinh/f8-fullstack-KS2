@@ -1,7 +1,10 @@
 //handle scroll
 import { client } from "./clients.js";
 
+
 window.onload = () => {
+  document.querySelector(".loader").style.display = "block";
+  
     const viewportHeight = document.documentElement.clientHeight;
     // console.log(viewportHeight);
     window.addEventListener("scroll", (e) => {
@@ -10,8 +13,6 @@ window.onload = () => {
       const pageHeight = document.documentElement.scrollHeight;
       // console.log(pageHeight);
       if (scrolledY + viewportHeight >= pageHeight - 100) {
-        // document.querySelector(".loading").style.display = "block";
-        document.querySelector(".loader").style.display = "block";
         getPosts();
       }
      
