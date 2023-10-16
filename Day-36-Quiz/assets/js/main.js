@@ -16,9 +16,9 @@ let scorePlayer = 0, incorrect = 0, correct = 0, check = false;
 const getData = async (i) => {
   const { data: questions } = await client.get(`/questions`);
   const n = questions.length;
-  // if(i === 0) {
-  //   incorrectAnswer.innerText = n;
-  // }
+  if(i === 0) {
+    incorrectAnswer.innerText = n;
+  }
   if(i >= n) {
     stopBlock.style.display = "block";
   }
