@@ -16,9 +16,9 @@ let scorePlayer = 0, incorrect = 0, correct = 0, check = false;
 const getData = async (i) => {
   const { data: questions } = await client.get(`/questions`);
   const n = questions.length;
-  if(i === 0) {
-    incorrectAnswer.innerText = n;
-  }
+  // if(i === 0) {
+  //   incorrectAnswer.innerText = n;
+  // }
   if(i >= n) {
     stopBlock.style.display = "block";
   }
@@ -70,41 +70,44 @@ const render = (data, n) => {
     const list = quizWrapper.querySelectorAll(".quiz__answer");
     quizAnswers.addEventListener("click", (e) => {
       const dataIndex = e.target.dataset.index;
-      if(+dataIndex !== +data.key) {
-        e.target.style.background = "red";
-        // list[data.key].style.background = "green";
-        list.forEach((value, index) => {
-            if(index == +data.key) {
-                value.style.background =  "green";
-            } else if(index !== +dataIndex) {
-                value.style.visibility = "hidden";
-            }
-        });
-        const random = Math.floor(Math.random() * (200 - 0) + 1);
-        if(scorePlayer - random > 0) {
-          scorePlayer-= random;
+      console.log(dataIndex);
+      if(dataIndex !== undefined) {
+        if(+dataIndex !== +data.key) {
+          e.target.style.background = "red";
+          // list[data.key].style.background = "green";
+          list.forEach((value, index) => {
+              if(index == +data.key) {
+                  value.style.background =  "green";
+              } else if(index !== +dataIndex) {
+                  value.style.visibility = "hidden";
+              }
+          });
+          const random = Math.floor(Math.random() * (200 - 0) + 1);
+          if(scorePlayer - random > 0) {
+            scorePlayer-= random;
+          }
+          score.innerText = `${scorePlayer}`;
+          quizAnswers.style.pointerEvents = "none";
+          i++;
+          setTimeout(() => {
+            getData(i);
+          }, 1500);
+        } else {
+          correct++;
+          e.target.style.background = "green";
+           list.forEach((value, index) => {
+             if (index !== +data.key) {
+              value.style.visibility = "hidden";
+             }
+           });
+          scorePlayer += Math.floor(Math.random() * (2001 - 1000) + 1000);
+          score.innerText = `${scorePlayer}`;
+          quizAnswers.style.pointerEvents = "none";
+          i++;
+          setTimeout(() => {
+            getData(i);
+          }, 1500);
         }
-        score.innerText = `${scorePlayer}`;
-        quizAnswers.style.pointerEvents = "none";
-        i++;
-        setTimeout(() => {
-          getData(i);
-        }, 1500);
-      } else {
-        correct++;
-        e.target.style.background = "green";
-         list.forEach((value, index) => {
-           if (index !== +data.key) {
-            value.style.visibility = "hidden";
-           }
-         });
-        scorePlayer += Math.floor(Math.random() * (2001 - 1000) + 1000);
-        score.innerText = `${scorePlayer}`;
-        quizAnswers.style.pointerEvents = "none";
-        i++;
-        setTimeout(() => {
-          getData(i);
-        }, 1500);
       }
       handleEnd(scorePlayer, n, correct);
     });
@@ -112,9 +115,6 @@ const render = (data, n) => {
 }
 
 /*Play again */
-
-
-
 const handleEnd = (scorePlayer, n, correct) => {
   stopScore.innerText = scorePlayer;
   incorrectAnswer.innerText = n - correct;
