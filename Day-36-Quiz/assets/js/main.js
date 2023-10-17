@@ -38,12 +38,13 @@ const handleStart = () => {
     }, 4000);
   
     getData(0);
-  })
+  });
 }
 
 handleStart();
 
 const getData = async (i) => {
+  console.log(i);
   const { data: questions } = await client.get(`/questions`);
   quizStatus.style.background = "transparent";
   quizStatus.innerText = "";
@@ -64,17 +65,20 @@ const getData = async (i) => {
 const handleTime = () => {
     startTime = 0;
     function animate(time) {
+      console.log("time: ",time);
       if (!startTime) {
         startTime = time;
       }
-      var elapsedTime = time - startTime;
-      var progress = elapsedTime / (totalTime * 1000);
+      const elapsedTime = time - startTime;
+      const progress = elapsedTime / (totalTime * 1000);
       runTimeQuiz.style.width = progress * 100 + "%";
 
       if (elapsedTime < totalTime * 1000) {
+        
         requestAnimationFrame(animate);
       } else {
         i++;
+        startTime = 0;
         getData(i);
       }
     }
