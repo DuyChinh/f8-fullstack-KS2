@@ -9,6 +9,10 @@ const correctAnswer = document.querySelector(".quiz__correct span");
 const quizStatus = document.querySelector(".quiz__status");
 const quizStart = document.querySelector(".quiz__start");
 const btnStart = document.querySelector(".quiz__start .btn-start");
+const audio = document.querySelector("audio");
+const audioWrong = document.querySelector("#wrongAnswer");
+const audioRight = document.querySelector("#rightAnswer");
+
 import { client } from "./clients.js";
 const totalTime = 10; 
 let startTime = 0;
@@ -24,20 +28,15 @@ const handleStart = () => {
     var intervalId = setInterval(function () {
       second +=1;
       btnStart.innerText = second;
-
-      // Các công việc được thực hiện trong hàm setInterval
-      console.log("Đang chạy...");
     }, 1000);
 
-    // Sau một khoảng thời gian, bạn muốn thoát khỏi hàm setInterval
     setTimeout(function () {
-      // Gọi hàm clearInterval và truyền vào ID của hàm setInterval
       clearInterval(intervalId);
       quizStart.style.display = "none";
       btnStart.innerText = "Start";
-      
+      audio.play();
     }, 4000);
-    
+  
     getData(0);
   })
 }
@@ -53,6 +52,7 @@ const getData = async (i) => {
     incorrectAnswer.innerText = n;
   }
   if(i >= n) {
+    audio.pause();
     i = 0;
     stopBlock.style.display = "block";
   }
@@ -108,6 +108,7 @@ const render = (data, n) => {
       const dataIndex = e.target.dataset.index;
       if(dataIndex !== undefined) {
         if(+dataIndex !== +data.key) {
+          audioWrong.play();
           quizStatus.style.background = "#ff3535";
           quizStatus.innerText = "incorrect";
           e.target.style.background = "#ff3535";
@@ -127,9 +128,12 @@ const render = (data, n) => {
           quizAnswers.style.pointerEvents = "none";
           i++;
           setTimeout(() => {
+            audioWrong.pause();
+            audioWrong.currentTime = 0;
             getData(i);
           }, 1500);
         } else {
+          audioRight.play();
           quizStatus.style.background = "#46cb18";
           quizStatus.innerText = "correct";
           correct++;
@@ -144,6 +148,8 @@ const render = (data, n) => {
           quizAnswers.style.pointerEvents = "none";
           i++;
           setTimeout(() => {
+            audioRight.pause();
+            audioRight.currentTime = 0;
             getData(i);
           }, 1500);
         }
