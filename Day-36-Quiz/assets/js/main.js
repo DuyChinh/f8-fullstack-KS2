@@ -6,6 +6,7 @@ const btnPlay = document.querySelector(".quiz__stop .btn-play-again");
 const stopScore = document.querySelector(".quiz__stop-score span");
 const incorrectAnswer = document.querySelector(".quiz__incorrect span");
 const correctAnswer = document.querySelector(".quiz__correct span");
+const quizStatus = document.querySelector(".quiz__status");
 import { client } from "./clients.js";
 const totalTime = 10; 
 let startTime = 0;
@@ -15,6 +16,8 @@ let scorePlayer = 0, incorrect = 0, correct = 0, check = false;
 
 const getData = async (i) => {
   const { data: questions } = await client.get(`/questions`);
+  quizStatus.style.background = "transparent";
+  quizStatus.innerText = "";
   const n = questions.length;
   if(i === 0) {
     incorrectAnswer.innerText = n;
@@ -70,9 +73,10 @@ const render = (data, n) => {
     const list = quizWrapper.querySelectorAll(".quiz__answer");
     quizAnswers.addEventListener("click", (e) => {
       const dataIndex = e.target.dataset.index;
-      console.log(dataIndex);
       if(dataIndex !== undefined) {
         if(+dataIndex !== +data.key) {
+          quizStatus.style.background = "red";
+          quizStatus.innerText = "incorrect";
           e.target.style.background = "red";
           // list[data.key].style.background = "green";
           list.forEach((value, index) => {
@@ -93,6 +97,8 @@ const render = (data, n) => {
             getData(i);
           }, 1500);
         } else {
+          quizStatus.style.background = "green";
+          quizStatus.innerText = "correct";
           correct++;
           e.target.style.background = "green";
            list.forEach((value, index) => {
