@@ -7,12 +7,42 @@ const stopScore = document.querySelector(".quiz__stop-score span");
 const incorrectAnswer = document.querySelector(".quiz__incorrect span");
 const correctAnswer = document.querySelector(".quiz__correct span");
 const quizStatus = document.querySelector(".quiz__status");
+const quizStart = document.querySelector(".quiz__start");
+const btnStart = document.querySelector(".quiz__start .btn-start");
 import { client } from "./clients.js";
 const totalTime = 10; 
 let startTime = 0;
 var i = 0;
 let scorePlayer = 0, incorrect = 0, correct = 0, check = false;
 
+/*Start */
+const handleStart = () => {
+  i = 0;
+  quizStart.style.display = "block";
+  btnStart.addEventListener("click", () => {
+    let second = 0;
+    var intervalId = setInterval(function () {
+      second +=1;
+      btnStart.innerText = second;
+
+      // Các công việc được thực hiện trong hàm setInterval
+      console.log("Đang chạy...");
+    }, 1000);
+
+    // Sau một khoảng thời gian, bạn muốn thoát khỏi hàm setInterval
+    setTimeout(function () {
+      // Gọi hàm clearInterval và truyền vào ID của hàm setInterval
+      clearInterval(intervalId);
+      quizStart.style.display = "none";
+      btnStart.innerText = "Start";
+      
+    }, 4000);
+    
+    getData(0);
+  })
+}
+
+handleStart();
 
 const getData = async (i) => {
   const { data: questions } = await client.get(`/questions`);
@@ -23,6 +53,7 @@ const getData = async (i) => {
     incorrectAnswer.innerText = n;
   }
   if(i >= n) {
+    i = 0;
     stopBlock.style.display = "block";
   }
   const sen = `${i+1}/${n}`;
@@ -50,11 +81,13 @@ const handleTime = () => {
     requestAnimationFrame(animate);
 }
 
-getData(0);
+// getData(0);
 
 const quizWrapper = document.querySelector(".quiz-wrapper");
 const container = quizWrapper.querySelector(".quiz-wrapper .container");
 const score = quizWrapper.querySelector(".quiz__action-score span");
+const rateStop =document.querySelector(".quiz__stop-rate-correct");
+console.log(rateStop);
 
 const render = (data, n) => {
     const html = `
@@ -75,13 +108,13 @@ const render = (data, n) => {
       const dataIndex = e.target.dataset.index;
       if(dataIndex !== undefined) {
         if(+dataIndex !== +data.key) {
-          quizStatus.style.background = "red";
+          quizStatus.style.background = "#ff3535";
           quizStatus.innerText = "incorrect";
-          e.target.style.background = "red";
+          e.target.style.background = "#ff3535";
           // list[data.key].style.background = "green";
           list.forEach((value, index) => {
               if(index == +data.key) {
-                  value.style.background =  "green";
+                  value.style.background = "#46cb18";
               } else if(index !== +dataIndex) {
                   value.style.visibility = "hidden";
               }
@@ -97,10 +130,10 @@ const render = (data, n) => {
             getData(i);
           }, 1500);
         } else {
-          quizStatus.style.background = "green";
+          quizStatus.style.background = "#46cb18";
           quizStatus.innerText = "correct";
           correct++;
-          e.target.style.background = "green";
+          e.target.style.background = "#46cb18";
            list.forEach((value, index) => {
              if (index !== +data.key) {
               value.style.visibility = "hidden";
@@ -125,15 +158,22 @@ const handleEnd = (scorePlayer, n, correct) => {
   stopScore.innerText = scorePlayer;
   incorrectAnswer.innerText = n - correct;
   correctAnswer.innerText = correct;
+  const width = correct * 100 / n;
+  rateStop.innerText = width.toFixed(1) + "%";
+  rateStop.style.width = width + "%";
 }
 
 
 btnPlay.addEventListener("click", () => {
   stopBlock.style.display = "none";
-  scorePlayer = 0; incorrect = 0; correct = 0;
+  scorePlayer = 0;
+  incorrect = 0;
+  correct = 0;
   score.innerText = scorePlayer;
   i = 0;
-  getData(i);
+  // getData(i);
+
+  handleStart();
 });
 
 
