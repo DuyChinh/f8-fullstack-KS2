@@ -21,6 +21,8 @@ let scorePlayer = 0, incorrect = 0, correct = 0, check = false;
 
 /*Start */
 const handleStart = () => {
+  correctAnswer.innerText = "0";
+  scorePlayer = 0; incorrect = 0; correct = 0;
   i = 0;
   quizStart.style.display = "block";
   btnStart.addEventListener("click", () => {
@@ -51,6 +53,7 @@ const getData = async (i) => {
   const n = questions.length;
   if(i === 0) {
     incorrectAnswer.innerText = n;
+     
   }
   if(i >= n) {
     audio.pause();
@@ -182,7 +185,6 @@ btnPlay.addEventListener("click", () => {
   score.innerText = scorePlayer;
   i = 0;
   // getData(i);
-
   handleStart();
 });
 
