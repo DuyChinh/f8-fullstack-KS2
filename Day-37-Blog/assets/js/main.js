@@ -151,7 +151,7 @@ const handleAction = () => {
       loginForm.addEventListener("submit", (e) => {
           e.preventDefault();
           btnLogin.disabled = true;
-          // btnLogin.classList.add("active");
+          btnLogin.classList.add("active");
           const email = emailLogin.value;
           const password = passwordLogin.value;
           console.log(email, password);
@@ -190,34 +190,41 @@ const handleLogin = async({email, password}) => {
     console.log(res, database);
     const divEL = document.createElement("div");
     divEL.classList.add("notice-register");
+    divEL.style.background = "red";
     divEL.innerText = database.message;
     root.append(divEL);
     if(res.ok) {
-        btnLogin.disabled = false;
-      // btnLogin.classList.remove("active");
-        localStorage.setItem("access_token", database.data.accessToken);
-        localStorage.setItem("refresh_token", database.data.refreshToken);
-        
-        formAction.style.display = "none";
-        divEL.style.display = "none";
+      divEL.style.background = "greenyellow";
+      btnLogin.disabled = false;
+      btnLogin.classList.remove("active");
+      localStorage.setItem("access_token", database.data.accessToken);
+      localStorage.setItem("refresh_token", database.data.refreshToken);
+      
+      formAction.style.display = "none";
+      divEL.style.display = "none";
       //renderBlog
     //   renderBlog();
-        getProfile();
+      getProfile();
       //avatar
-        const nameUser = email[0].toUpperCase();
-        const containerDiv = document.createElement("div");
-        containerDiv.classList.add("container");
-        const divAvatar = document.createElement("div");
-        divAvatar.innerText = nameUser;
-        divAvatar.classList.add("avatar-user");
-        containerDiv.append(divAvatar);
-        root.prepend(containerDiv);
-      
+      const nameUser = email[0].toUpperCase();
+      const containerDiv = document.createElement("div");
+      containerDiv.classList.add("container");
+      const divAvatar = document.createElement("div");
+      divAvatar.innerText = nameUser;
+      divAvatar.classList.add("avatar-user");
+      containerDiv.append(divAvatar);
+      root.prepend(containerDiv);
+      renderPost().then(() => {
+        handlePostUp();
+      });
     }
-     setTimeout(() => {
-       divEL.classList.remove("notice-register");
-     }, 1500);
+    setTimeout(() => {
+      divEL.classList.remove("notice-register");
+      divEL.style.display = "none";
+    }, 1500);
     btnLogin.disabled = false;
+    btnLogin.classList.remove("active");
+
 }
 
 const handleRegister = async({email, password, name}) => {
@@ -229,17 +236,21 @@ const handleRegister = async({email, password, name}) => {
     const registerForm = document.querySelector(".register-form");
     const divEL = document.createElement("div");
     divEL.classList.add("notice-register");
+    divEL.style.background = "red";
     divEL.innerText = data.message;
     root.append(divEL);
     if(res.ok) {
-        registerForm.style.display = "none";
-        loginForm.style.display = "flex";
-        btnRegister.disabled = false;
+      divEL.style.background = "greenyellow";
+      registerForm.style.display = "none";
+      loginForm.style.display = "flex";
+      btnRegister.disabled = false;
+      btnRegister.classList.remove("active");
     }
     setTimeout(() => {
         divEL.classList.remove("notice-register");
     }, 1500);
     btnRegister.disabled = false;
+    btnRegister.classList.remove("active");
 }
 
 async function getProfile() {

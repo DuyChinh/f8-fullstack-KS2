@@ -93,7 +93,7 @@ export function renderRegister() {
 
 export function renderBlog() {
   var containerDiv = document.createElement("div");
-  containerDiv.classList.add("container");
+  containerDiv.classList.add("container-blog");
 
   // Create form element
   var formElement = document.createElement("form");

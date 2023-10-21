@@ -19,7 +19,8 @@ body {
     background:red; */
 }
 
-.container {
+.container, 
+.container-blog {
     width: 1110px;
     margin: 0 auto;
     /* background: #000; */
@@ -98,7 +99,8 @@ input {
 .notice-register {
     position: fixed;
     top: 20px;
-    background: greenyellow;
+    /* background: greenyellow; */
+    background: red;
     color: #fff;
     font-size: 1.7rem;
     text-align: center;
