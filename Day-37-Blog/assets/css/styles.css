@@ -181,3 +181,15 @@ textarea {
     font-size: 3.2rem;
     color: #5c96e2;
 }
+
+.user-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.user-block .name-user {
+    font-size: 3.5rem;
+    color: #fff;
+    font-weight: 600;
+}

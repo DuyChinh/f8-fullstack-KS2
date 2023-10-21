@@ -138,8 +138,11 @@ export function renderBlog() {
   // Append form to the container
   containerDiv.appendChild(formElement);
 
-  // Append container to the document body
   root.prepend(containerDiv);
+}
+
+export async function renderUser() {
+    
 }
 
 export async function renderPost() {

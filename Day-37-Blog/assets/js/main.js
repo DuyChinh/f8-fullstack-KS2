@@ -205,15 +205,26 @@ const handleLogin = async({email, password}) => {
       //renderBlog
     //   renderBlog();
       getProfile();
-      //avatar
-      const nameUser = email[0].toUpperCase();
-      const containerDiv = document.createElement("div");
-      containerDiv.classList.add("container");
-      const divAvatar = document.createElement("div");
-      divAvatar.innerText = nameUser;
-      divAvatar.classList.add("avatar-user");
-      containerDiv.append(divAvatar);
-      root.prepend(containerDiv);
+      // //avatar
+      // const charUser = database.data.name[0];
+      // const nameUser = database.data.name;
+      // const containerDiv = document.createElement("div");
+      // containerDiv.classList.add("container");
+      // const userDiv = document.createElement("div");
+      // userDiv.classList.add("user-block");
+      
+      // const divAvatar = document.createElement("div");
+      // divAvatar.innerText = charUser;
+      // divAvatar.classList.add("avatar-user");
+      // userDiv.append(divAvatar);
+
+      // const divName = document.createElement("div");
+      // divName.innerText = nameUser;
+      // divName.classList.add("name-user");
+      // userDiv.append(divName);
+
+      // containerDiv.append(userDiv);
+      // root.prepend(containerDiv);
       renderPost().then(() => {
         handlePostUp();
       });
@@ -261,6 +272,26 @@ async function getProfile() {
     localStorage.getItem("access_token")
   );
   renderBlog();
+  //avatar
+  const charUser = user.data.name[0];
+  const nameUser = user.data.name;
+  const containerDiv = document.createElement("div");
+  containerDiv.classList.add("container");
+  const userDiv = document.createElement("div");
+  userDiv.classList.add("user-block");
+
+  const divAvatar = document.createElement("div");
+  divAvatar.innerText = charUser;
+  divAvatar.classList.add("avatar-user");
+  userDiv.append(divAvatar);
+
+  const divName = document.createElement("div");
+  divName.innerText = nameUser;
+  divName.classList.add("name-user");
+  userDiv.append(divName);
+
+  containerDiv.append(userDiv);
+  root.prepend(containerDiv);
   const formPost = root.querySelector(".form-post");
   formPost.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -270,10 +301,10 @@ async function getProfile() {
     const titleValue = titleEl.value;
     const contentValue = contentEl.value;
     const token = localStorage.getItem("access_token");
-    if(titleValue && contentValue) {
-        handlePost(titleValue, contentValue, token, titleEl, contentEl);
+    if (titleValue && contentValue) {
+      handlePost(titleValue, contentValue, token, titleEl, contentEl);
     }
-  })
+  });
   //render logout
   renderbtnLogout();
   //Logout
