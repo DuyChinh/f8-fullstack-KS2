@@ -1,5 +1,9 @@
 import  HttpClient  from "./clients.js";
-import { renderLogin, renderLoginRegister, renderRegister, renderBlog } from "./render.js";
+import {
+     renderLogin, renderLoginRegister, renderRegister, renderBlog ,
+     renderbtnLogout,
+     renderPost
+} from "./render.js";
 const client = new HttpClient("https://api-auth-two.vercel.app");
 // client.setUrl("https://api-auth-two.vercel.app");
 
@@ -117,6 +121,9 @@ const client = new HttpClient("https://api-auth-two.vercel.app");
 // }
 const root = document.querySelector("#root");
 const btnSignIn = document.querySelector(".btn-sign-in");
+renderPost().then(() => {
+  handlePostUp();
+});
 btnSignIn.addEventListener("click", () => {
   renderLoginRegister();
   const btnSignUp = document.querySelector(".btn-sign-up");
@@ -172,6 +179,7 @@ const handleAction = () => {
     });
 }
 
+
 const handleLogin = async({email, password}) => {
     const { res, data:database } =  await client.post("/auth/login", 
     {email, password}
@@ -184,15 +192,27 @@ const handleLogin = async({email, password}) => {
     divEL.classList.add("notice-register");
     divEL.innerText = database.message;
     root.append(divEL);
-    if(res.ok) {  
+    if(res.ok) {
         btnLogin.disabled = false;
-        // btnLogin.classList.remove("active");
+      // btnLogin.classList.remove("active");
         localStorage.setItem("access_token", database.data.accessToken);
         localStorage.setItem("refresh_token", database.data.refreshToken);
-        getProfile();
+        
         formAction.style.display = "none";
         divEL.style.display = "none";
-        renderBlog();
+      //renderBlog
+    //   renderBlog();
+        getProfile();
+      //avatar
+        const nameUser = email[0].toUpperCase();
+        const containerDiv = document.createElement("div");
+        containerDiv.classList.add("container");
+        const divAvatar = document.createElement("div");
+        divAvatar.innerText = nameUser;
+        divAvatar.classList.add("avatar-user");
+        containerDiv.append(divAvatar);
+        root.prepend(containerDiv);
+      
     }
      setTimeout(() => {
        divEL.classList.remove("notice-register");
@@ -223,16 +243,38 @@ const handleRegister = async({email, password, name}) => {
 }
 
 async function getProfile() {
-    // console.log(localStorage.getItem("access_token"));
-    const { data: user, res } = await client.get(
-      "/users/profile", 
-      {},
-      localStorage.getItem("access_token")
-    );
-    console.log(res);
-    if(+res.status === 401) {
-        refreshToken();
+  // console.log(localStorage.getItem("access_token"));
+  const { data: user, res } = await client.get(
+    "/users/profile",
+    {},
+    localStorage.getItem("access_token")
+  );
+  renderBlog();
+  const formPost = root.querySelector(".form-post");
+  formPost.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const titleEl = formPost.querySelector(".title-post");
+    const contentEl = document.querySelector(".content-post");
+    // console.log(titleEl, contentEl, localStorage.getItem("access_token"));
+    const titleValue = titleEl.value;
+    const contentValue = contentEl.value;
+    const token = localStorage.getItem("access_token");
+    if(titleValue && contentValue) {
+        handlePost(titleValue, contentValue, token, titleEl, contentEl);
     }
+  })
+  //render logout
+  renderbtnLogout();
+  //Logout
+  const btnlogOut = root.querySelector(".btn-log-out");
+  btnlogOut.addEventListener("click", () => {
+    console.log("ok");
+    console.log(localStorage.getItem("access_token"));
+    handleLogout(localStorage.getItem("access_token"));
+  });
+  if (+res.status === 401) {
+    refreshToken();
+  }
 }
 
 const refreshToken = async() => {
@@ -246,6 +288,44 @@ const refreshToken = async() => {
         localStorage.setItem("access_token", tokens.data.token.accessToken);
         localStorage.setItem("refresh_token", tokens.data.token.refreshToken);
     }
+}
+
+const handleLogout =  async(tokens) => {
+    const { data, res } = await client.post("auth/logout", {}, tokens);
+    console.log(res);
+    if(res.ok) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+    } else {
+        console.log("error");
+    }
+}
+
+const handlePost =  async(title, content, token, titleEl, contentEl) => {
+    console.log(title, content);
+    const { res, data } = await client.post("/blogs", 
+    {title, content},
+    {},
+    token,
+    );
+    console.log(res, data);
+    if(+res.status === 401) {
+        refreshToken();
+    }
+    if(res.ok) {
+        root.innerHTML = "";
+        renderPost().then(() => {
+            handlePostUp();
+        });
+        getProfile();
+        titleEl.value = "";
+        contentEl.value = "";
+    }
+    console.log(res, data);
+}
+
+const handlePostUp = () => {
+
 }
 
 

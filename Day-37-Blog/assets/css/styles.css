@@ -10,6 +10,7 @@ html {
 
 body {
     font-size: 1.6rem;
+    background: #000;
 }
 
 #root {
@@ -103,10 +104,78 @@ input {
     text-align: center;
     right: -5px;
     padding: 25px 0;
-    width: 250px;
+    width: 350px;
     border-radius: 6px;
 }
 
 .btn:hover {
     opacity: 0.8;
+}
+
+.avatar-user {
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    background: green;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+textarea {
+    padding: 5px 10px;
+}
+
+.register-block {
+    position: fixed;
+    right: 80px;
+    top: 50px;
+}
+
+.blog-item {
+    margin: 30px 0;
+}
+
+.blog-item .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    background: green;
+    font-size: 3.5rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+}
+
+.blog-item .title {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    color: red;
+    font-weight: 700;
+}
+
+.blog-item .info {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blog-item .content {
+    margin-top: 20px;
+    font-size: 2.2rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.blog-item .name {
+    margin-top: 5px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 3.2rem;
+    color: #5c96e2;
 }
