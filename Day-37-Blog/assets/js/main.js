@@ -1,9 +1,10 @@
 import  HttpClient  from "./clients.js";
 import {
      renderLogin, renderLoginRegister, renderRegister, renderBlog ,
-     renderbtnLogout,
+     renderbtnLogout, renderDatePicker,
      renderPost
 } from "./render.js";
+
 const client = new HttpClient("https://api-auth-two.vercel.app");
 // client.setUrl("https://api-auth-two.vercel.app");
 
@@ -202,29 +203,7 @@ const handleLogin = async({email, password}) => {
       
       formAction.style.display = "none";
       divEL.style.display = "none";
-      //renderBlog
-    //   renderBlog();
       getProfile();
-      // //avatar
-      // const charUser = database.data.name[0];
-      // const nameUser = database.data.name;
-      // const containerDiv = document.createElement("div");
-      // containerDiv.classList.add("container");
-      // const userDiv = document.createElement("div");
-      // userDiv.classList.add("user-block");
-      
-      // const divAvatar = document.createElement("div");
-      // divAvatar.innerText = charUser;
-      // divAvatar.classList.add("avatar-user");
-      // userDiv.append(divAvatar);
-
-      // const divName = document.createElement("div");
-      // divName.innerText = nameUser;
-      // divName.classList.add("name-user");
-      // userDiv.append(divName);
-
-      // containerDiv.append(userDiv);
-      // root.prepend(containerDiv);
       renderPost().then(() => {
         handlePostUp();
       });
@@ -264,6 +243,7 @@ const handleRegister = async({email, password, name}) => {
     btnRegister.classList.remove("active");
 }
 
+flatpickr("input[type=datetime-local]", {});
 async function getProfile() {
   // console.log(localStorage.getItem("access_token"));
   const { data: user, res } = await client.get(
@@ -293,18 +273,194 @@ async function getProfile() {
   containerDiv.append(userDiv);
   root.prepend(containerDiv);
   const formPost = root.querySelector(".form-post");
+  const containerBlog = root.querySelector(".container-blog");
+
+  //datepicker
+  // const contentContainer = document.createElement("div");
+  // contentContainer.classList.add("content-container");
+
+  // const contentPost = document.createElement("label");
+  // contentPost.classList.add("content-post");
+  // contentPost.innerText = "Content bài viết";
+  // contentContainer.append(contentPost);
+
+  // const inputContent = document.createElement("textarea");
+  // inputContent.classList.add("input-content");
+  // inputContent.cols = 50;
+  // inputContent.rows = 10;
+  // inputContent.placeholder = "Vui lòng nhập content bài viết của bạn...";
+  // contentContainer.append(inputContent);
+
+  // containerFormBlog.append(contentContainer);
+
+  // formPost.append(containerFormBlog);
+
+  // Create the container element
+  // const containerDate = document.createElement("div");
+  // containerDate.classList.add("container");
+  // containerDate.classList.add("form-child");
+
+  // const titleSetTime = document.createElement("div");
+  // titleSetTime.classList.add("title-set-time");
+  // titleSetTime.innerText = "Hãy chọn thời gian đăng bài của bạn!";
+  // containerDate.append(titleSetTime);
+
+  // // Create the calendar element
+  // const calendar = document.createElement("div");
+  // calendar.classList.add("calendar");
+
+  // // Create the calendar header
+  // const calendarHeader = document.createElement("div");
+  // calendarHeader.classList.add("calendar-header");
+
+  // const calendarSet = document.createElement("div");
+  // calendarSet.classList.add("calendar-set");
+
+  // const monthPicker = document.createElement("span");
+  // monthPicker.classList.add("month-picker");
+  // monthPicker.id = "month-picker";
+  // monthPicker.textContent = "May";
+
+  // const yearPicker = document.createElement("div");
+  // yearPicker.classList.add("year-picker");
+  // yearPicker.id = "year-picker";
+
+  // const preYear = document.createElement("span");
+  // preYear.classList.add("year-change");
+  // preYear.id = "pre-year";
+  // preYear.innerHTML = "<pre><</pre>";
+
+  // const year = document.createElement("span");
+  // year.id = "year";
+  // year.textContent = "2020";
+
+  // const nextYear = document.createElement("span");
+  // nextYear.classList.add("year-change");
+  // nextYear.id = "next-year";
+  // nextYear.innerHTML = "<pre>></pre>";
+
+  // yearPicker.appendChild(preYear);
+  // yearPicker.appendChild(year);
+  // yearPicker.appendChild(nextYear);
+
+  // calendarHeader.appendChild(monthPicker);
+  // calendarHeader.appendChild(yearPicker);
+
+  // // Create the calendar body
+  // const calendarBody = document.createElement("div");
+  // calendarBody.classList.add("calendar-body");
+
+  // const calendarWeekDays = document.createElement("div");
+  // calendarWeekDays.classList.add("calendar-week-days");
+  // const weekDayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  // weekDayNames.forEach((dayName) => {
+  //   const dayElement = document.createElement("div");
+  //   dayElement.textContent = dayName;
+  //   calendarWeekDays.appendChild(dayElement);
+  // });
+
+  // const calendarDays = document.createElement("div");
+  // calendarDays.classList.add("calendar-days");
+
+  // calendarBody.appendChild(calendarWeekDays);
+  // calendarBody.appendChild(calendarDays);
+
+  // // Create the calendar footer
+  // const calendarFooter = document.createElement("div");
+  // calendarFooter.classList.add("calendar-footer");
+
+  // // Create the date-time format
+  // const dateTimeFormat = document.createElement("div");
+  // dateTimeFormat.classList.add("date-time-formate");
+
+  // const dayTextFormat = document.createElement("div");
+  // dayTextFormat.classList.add("day-text-formate");
+  // dayTextFormat.textContent = "TODAY";
+
+  // const dateTimeValue = document.createElement("div");
+  // dateTimeValue.classList.add("date-time-value");
+
+  // const timeFormat = document.createElement("div");
+  // timeFormat.classList.add("time-formate");
+  // timeFormat.textContent = "02:51:20";
+
+  // const dateFormat = document.createElement("div");
+  // dateFormat.classList.add("date-formate");
+  // dateFormat.textContent = "23 - july - 2022";
+
+  // dateTimeValue.appendChild(timeFormat);
+  // dateTimeValue.appendChild(dateFormat);
+
+  // dateTimeFormat.appendChild(dayTextFormat);
+  // dateTimeFormat.appendChild(dateTimeValue);
+
+  // // Create the month list
+  // const monthList = document.createElement("div");
+  // monthList.classList.add("month-list");
+
+  // // Append the created elements to build the structure
+  // calendar.appendChild(calendarSet);
+  // calendar.appendChild(calendarHeader);
+  // calendar.appendChild(calendarBody);
+  // calendar.appendChild(calendarFooter);
+  // calendar.appendChild(dateTimeFormat);
+  // calendar.appendChild(monthList);
+
+  // containerDate.appendChild(calendar);
+
+  // formPost.append(containerDate);
+
+  // const btnSubmitWrap = document.createElement("div");
+  // btnSubmitWrap.classList.add("btn-submit-wrap");
+  // const btnPost = document.createElement("button");
+  // btnPost.classList.add("btn-post");
+  // btnPost.classList.add("btn-animation");
+  // btnPost.innerText = "Đăng bài";
+  // btnSubmitWrap.append(btnPost);
+
+  // formPost.append(btnSubmitWrap);
+
+  // containerBlog.append(formPost);
+
+  // root.append(containerBlog);
+
+  // renderDatePicker();
+
+  const standardString = (str) => {
+    if(+str < 10) {
+      return "0" + str;
+    }
+    return str;
+  }
+
+  const conditionPost = (timeTotal) => {
+    const today = new Date();
+    if(today.getTime() === timeTotal.getTime()) {
+      return true;
+    }
+    return false;
+  }
+
   formPost.addEventListener("submit", (e) => {
     e.preventDefault();
     const titleEl = formPost.querySelector(".title-post");
     const contentEl = document.querySelector(".content-post");
+    const timeEl = formPost.querySelector(".calendar");
+    // console.log(timeEl.value);
+    const timePost = new Date();
+    let datePost = "Time post: "+ standardString(timePost.getDate()+1) + " - "+ standardString(timePost.getMonth()) +  " - " + timePost.getFullYear()+ "  " +  standardString(timePost.getHours()) + ":" + standardString(timePost.getMinutes());
+    // console.log(datePost);
+    formPost.querySelector(".notice-timePost").innerText = datePost;
     // console.log(titleEl, contentEl, localStorage.getItem("access_token"));
     const titleValue = titleEl.value;
     const contentValue = contentEl.value;
     const token = localStorage.getItem("access_token");
-    if (titleValue && contentValue) {
+    if (titleValue && contentValue && conditionPost(timePost.getTime())) {
       handlePost(titleValue, contentValue, token, titleEl, contentEl);
     }
   });
+
   //render logout
   renderbtnLogout();
   //Logout
@@ -324,7 +480,8 @@ const refreshToken = async() => {
     {
         refreshToken: localStorage.getItem("refresh_token")
     });
-    console.log(res);
+    // console.log("refresh token: ");
+    // console.log(res, tokens);
     if(res.ok) {
         // console.log("fix");
         localStorage.setItem("access_token", tokens.data.token.accessToken);
@@ -352,7 +509,10 @@ const handlePost =  async(title, content, token, titleEl, contentEl) => {
     );
     console.log(res, data);
     if(+res.status === 401) {
+      console.log("error");
         refreshToken();
+        
+        // getProfile();
     }
     if(res.ok) {
         root.innerHTML = "";
@@ -362,8 +522,9 @@ const handlePost =  async(title, content, token, titleEl, contentEl) => {
         getProfile();
         titleEl.value = "";
         contentEl.value = "";
+    } else {
+      // handlePost();
     }
-    console.log(res, data);
 }
 
 const handlePostUp = () => {
