@@ -531,8 +531,13 @@ textarea {
     display: none;
 }
 
-.notice-timePost {
+.notice-timePost,
+.time-post-user {
     margin: 10px 0;
     color: rgba(255, 255, 0, 0.87);
     font-size: 1.8rem;
+}
+
+.time-post-user {
+    color: #6eeb83;
 }

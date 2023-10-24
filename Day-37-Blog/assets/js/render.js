@@ -163,6 +163,12 @@ export async function renderPost() {
     const { data: blogs, res } = await client.get(
       `/blogs?limit=${limit}&page=${page}`
     );
+    const standardString = (str) => {
+      if (+str < 10) {
+        return "0" + str;
+      }
+      return str;
+    };
     if(res.ok) {
         const arr = blogs.data;
         const containerBlog = document.createElement("div");
@@ -202,8 +208,25 @@ export async function renderPost() {
             info.append(name);
 
             const hrEl = document.createElement("hr");
+
+            const pEl = document.createElement("p");
+            pEl.classList.add("time-post-user");
+            const timePost = new Date(blog.createdAt);
+            let datePost =
+              "Time: " +
+              standardString(timePost.getDate()) +
+              " - " +
+              standardString(timePost.getMonth()+1) +
+              " - " +
+              timePost.getFullYear() +
+              "  " +
+              standardString(timePost.getHours()) +
+              ":" +
+              standardString(timePost.getMinutes());
+            pEl.innerText = datePost;
             blogItem.prepend(info);
             containerBlog.append(blogItem);
+            containerBlog.append(pEl);
             containerBlog.append(hrEl);
         });
         root.append(containerBlog);

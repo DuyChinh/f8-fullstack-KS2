@@ -435,8 +435,12 @@ async function getProfile() {
   }
 
   const conditionPost = (timeTotal) => {
+    if(isNaN(timeTotal)) {
+      console.log("Nan nannanan");
+      return true;
+    }
     const today = new Date();
-    if(today.getTime() === timeTotal.getTime()) {
+    if(today.getTime() === timeTotal) {
       return true;
     }
     return false;
@@ -448,14 +452,35 @@ async function getProfile() {
     const contentEl = document.querySelector(".content-post");
     const timeEl = formPost.querySelector(".calendar");
     // console.log(timeEl.value);
-    const timePost = new Date();
-    let datePost = "Time post: "+ standardString(timePost.getDate()+1) + " - "+ standardString(timePost.getMonth()) +  " - " + timePost.getFullYear()+ "  " +  standardString(timePost.getHours()) + ":" + standardString(timePost.getMinutes());
+    const timePost = new Date(timeEl.value);
+    let datePost = "";
+    // console.log(timePost);
+    if (timePost) {
+      datePost =
+        "Time post: " +
+        standardString(timePost.getDate()) +
+        " - " +
+        standardString(timePost.getMonth()+1) +
+        " - " +
+        timePost.getFullYear() +
+        "  " +
+        standardString(timePost.getHours()) +
+        ":" +
+        standardString(timePost.getMinutes());
+    }
+
     // console.log(datePost);
     formPost.querySelector(".notice-timePost").innerText = datePost;
+    setTimeout(() => {
+      formPost.querySelector(".notice-timePost").innerText = "";
+    }, 2000);
+    
     // console.log(titleEl, contentEl, localStorage.getItem("access_token"));
     const titleValue = titleEl.value;
     const contentValue = contentEl.value;
+
     const token = localStorage.getItem("access_token");
+    console.log(conditionPost(timePost.getTime()));
     if (titleValue && contentValue && conditionPost(timePost.getTime())) {
       handlePost(titleValue, contentValue, token, titleEl, contentEl);
     }
@@ -466,7 +491,7 @@ async function getProfile() {
   //Logout
   const btnlogOut = root.querySelector(".btn-log-out");
   btnlogOut.addEventListener("click", () => {
-    console.log("ok");
+    // console.log("ok");
     console.log(localStorage.getItem("access_token"));
     handleLogout(localStorage.getItem("access_token"));
   });
