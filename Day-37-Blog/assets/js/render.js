@@ -1,4 +1,10 @@
 import  HttpClient  from "./clients.js";
+import { replaceYouTubeVideos,
+         replaceLink,
+         replacePhone,
+         replaceEmail,
+         replaceContent,
+} from "./main.js";
 const client = new HttpClient("https://api-auth-two.vercel.app");
 let limit = 12;
 let page = 1;
@@ -178,18 +184,28 @@ export async function renderPost() {
             const nameArr = nameUser.split(/\s+/);
             const charName = nameArr[nameArr.length - 1][0];
             const title = blog.title;
-            let contentBlog = blog.content;
-            contentBlog = contentBlog.replace(/[<>&'"\/=]/g, "");
+            // contentBlog = contentBlog.replace(/[<>&'"\/=]/g, "");
             const blogItem = document.createElement("div");
             blogItem.classList.add("blog-item");
             const titleEl = document.createElement("div");
             titleEl.classList.add("title");
             titleEl.innerText = title;
             blogItem.append(titleEl);
-
+            
             const contentEl = document.createElement("div");
             contentEl.classList.add("content");
+           
+            let contentBlog = blog.content;
+            contentBlog.replaceAll("<", "&lt");
+            contentBlog = replaceContent(contentBlog);
             contentEl.innerText = contentBlog;
+            contentBlog = replaceEmail(contentBlog);
+            contentBlog = replacePhone(contentBlog);
+            contentBlog = replaceLink(contentBlog);
+            contentBlog = replaceYouTubeVideos(contentBlog);
+            if(contentBlog) {
+              contentEl.innerHTML = contentBlog;
+            }
             blogItem.append(contentEl);
 
             const info = document.createElement("div");

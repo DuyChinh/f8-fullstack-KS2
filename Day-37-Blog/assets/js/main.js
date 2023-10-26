@@ -436,7 +436,6 @@ async function getProfile() {
 
   const conditionPost = (timeTotal) => {
     if(isNaN(timeTotal)) {
-      console.log("Nan nannanan");
       return true;
     }
     const today = new Date();
@@ -455,7 +454,7 @@ async function getProfile() {
     const timePost = new Date(timeEl.value);
     let datePost = "";
     // console.log(timePost);
-    if (timePost) {
+    if (!isNaN()) {
       datePost =
         "Time post: " +
         standardString(timePost.getDate()) +
@@ -492,7 +491,7 @@ async function getProfile() {
   const btnlogOut = root.querySelector(".btn-log-out");
   btnlogOut.addEventListener("click", () => {
     // console.log("ok");
-    console.log(localStorage.getItem("access_token"));
+    // console.log(localStorage.getItem("access_token"));
     handleLogout(localStorage.getItem("access_token"));
   });
   if (+res.status === 401) {
@@ -526,18 +525,16 @@ const handleLogout =  async(tokens) => {
 }
 
 const handlePost =  async(title, content, token, titleEl, contentEl) => {
-    console.log(title, content);
+    // console.log(title, content);
     const { res, data } = await client.post("/blogs", 
     {title, content},
     {},
     token,
     );
-    console.log(res, data);
+    // console.log(res, data);
     if(+res.status === 401) {
       console.log("error");
         refreshToken();
-        
-        // getProfile();
     }
     if(res.ok) {
         root.innerHTML = "";
@@ -555,6 +552,70 @@ const handlePost =  async(title, content, token, titleEl, contentEl) => {
 const handlePostUp = () => {
 
 }
+
+export function replaceYouTubeVideos(content) {
+  const youtubeRegex = /(https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/[^\s]+)/g;
+  return content.replaceAll(youtubeRegex, function (url) {
+    if (url) {
+      let videoId = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)[2];
+      if (videoId) {
+        videoId = videoId.split(/[^0-9a-z_-]/i)[0];
+        return `
+        <iframe
+          width='500'
+          height='400'
+          src='https://www.youtube.com/embed/${videoId}'
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          allowFullScreen></iframe>
+      `;
+      }
+      return url;
+    }
+    return url;
+  });
+}
+
+
+export function replaceLink(content) {
+  const urlRegex = /(((https|http)?:\/\/)|(www\.))[^\s]+/g;
+  return content.replaceAll(urlRegex, (url) => {
+    // if (url.slice(0, 4) !== "http") {
+    //   url = "http://" + url;
+    // }
+    // if (url.slice(-1) === "/") {
+    //   url = url.substring(0, url.length - 1);
+    // }
+    return ` <a href="${url}" class="link" target="_blank">${url}</a> `;
+  });
+}
+
+export function replacePhone(content) {
+  const regexPhone = /(\+?\d{1,3}[-.\s]?)?\(?\d{1,}\)?[-.\s]?\d{1,}[-.\s]?\d{1,}/g;
+  return content = content.replaceAll(regexPhone, (phone) => {
+    return `<a href="tel:${phone}">${phone}</a>`;
+  });
+}
+
+export function replaceEmail(content) {
+  const regexEmail = /[\w\-]+\@(\w){2,}\.(\w){2,}[\.\w]+/g;
+  return content.replaceAll(regexEmail, (email) => {
+    return `<a href="mailto:${email}">${email}</a>`;
+  }
+  );
+}
+
+export function replaceContent(content) { 
+   const regex = /(\n+|\s+)/g;
+   const processedString = content.replace(/\n+/g, "\n");
+
+   // Chuyển nhiều dấu cách thành một dấu cách
+   const finalString = content.replace(/\s+/g, " ");
+   return finalString;
+}
+
+
 
 
 

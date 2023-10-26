@@ -19,6 +19,10 @@ body {
     background:red; */
 }
 
+a {
+    color: #22eaea; 
+}
+
 .container, 
 .container-blog {
     width: 1110px;
