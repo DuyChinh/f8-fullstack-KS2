@@ -483,6 +483,7 @@ async function getProfile() {
     if (titleValue && contentValue && conditionPost(timePost.getTime())) {
       handlePost(titleValue, contentValue, token, titleEl, contentEl);
     }
+    
   });
 
   //render logout
