@@ -12,7 +12,7 @@ const render = (html) => {
 }
 
 const show = (defaultLayout, component, el) => {
-    const html = defaultLayout().replace(/\{.*\}/g, component(el));
+    const html = defaultLayout().replace(/\{.*}/g, component(el));
     return html || component(params);
 }
 //Back to product
