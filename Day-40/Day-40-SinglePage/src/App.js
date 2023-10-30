@@ -6,7 +6,7 @@ import { ProductDetail } from "./Pages/ProductDetail";
 import { DefaultLayout } from "./Layouts/Default";
 
 export const App = () => {
-  console.log("login");
+  // console.log("login");
   return router(
     [
       {
