@@ -29,16 +29,8 @@ export default function ListTodo({
           );
         })
       ) : (
-        <li className="no-todo">Không có todo</li>
+        <li className="no-todo">Notodo</li>
       )}
     </ul>
   );
 }
-
-ListTodo.propTypes = {
-  data: propTypes.array.isRequired,
-  apiKey: propTypes.string,
-  setTodosList: propTypes.func,
-  loading: propTypes.bool,
-  setGlobalLoading: propTypes.func,
-};
