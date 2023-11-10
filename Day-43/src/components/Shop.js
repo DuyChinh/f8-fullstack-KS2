@@ -4,7 +4,7 @@ import { products } from "../data/product";
 import classes from "./Shop.module.css";
 import Modal from "./Modal";
 import Header from "./Header";
-import Giohang from "Giohang";
+import Giohang from "./Giohang";
 function Shop() {
   const [selectedCategory, setCategory] = useState(null);
   const [isShowModal, setShowModal] = useState(false);
