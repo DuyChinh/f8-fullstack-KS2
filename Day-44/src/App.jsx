@@ -1,4 +1,4 @@
-import SignIn from "./components/SignIn/SignIn";
+import SignIn from "./components/signIn/SignIn";
 import User from "./components/User/User"
 
 
