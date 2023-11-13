@@ -1,17 +1,9 @@
+import "./Loading.css";
 
-const Loading = ()=> {
+export default function Loading() {
   return (
-    <div className="lds-spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div className="loading">
+      <span className="loader"></span>
     </div>
-  )
+  );
 }
-
-export default Loading

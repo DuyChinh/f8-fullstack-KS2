@@ -2,15 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID;
 
-const {
-  VITE_REACT_APP_AUTH0_DOMAIN: domain,
-  VITE_REACT_APP_AUTH0_CLIENT_ID: clientId,
-} = import.meta.env;
-
-//  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-//  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,5 +20,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
     <App />
     </Auth0Provider>
+    <ToastContainer/>
   </React.StrictMode>
 );

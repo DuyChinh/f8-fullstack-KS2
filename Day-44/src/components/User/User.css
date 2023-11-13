@@ -1,0 +1,46 @@
+
+
+a {
+    text-decoration: none;
+}
+
+img.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+}
+
+.message-block {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-block {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0px auto;
+    
+}
+
+.message-block textarea {
+    width: 75%;
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+input {
+    /* width: 300px; */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 10px;
+}

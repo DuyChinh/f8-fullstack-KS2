@@ -6,7 +6,6 @@ const SignIn = () => {
     const { isLoading, loginWithPopup, isAuthenticated } = useAuth0();
     return (
       <>
-        {isLoading && <Loading />}
         {!isAuthenticated && (
           <div className="container">
             <p>Cảm ơn đã sử dụng dịch vụ của chúng tôi</p>
@@ -14,15 +13,12 @@ const SignIn = () => {
               Nếu có bất kì câu hỏi nào, hãy <b>đăng nhập</b> và gửi cho chúng
               tôi
             </p>
-            <button
-              onClick={() =>
-                loginWithPopup({})
-              }
-            >
+            <button onClick={() => loginWithPopup({})}>
               Đăng nhập || Đăng kí
             </button>
           </div>
         )}
+        {isLoading && <Loading />}
       </>
     );
 }
