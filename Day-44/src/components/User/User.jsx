@@ -5,15 +5,17 @@ import SignOut from "../SignOut/SignOut"
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "./User.css"
+import { useState } from "react";
 const serviceId = import.meta.env.VITE_ID_SERVICE_EMAILJS;
 const temId = import.meta.env.VITE_ID_TEMPLATE_EMAILJS;
 const apiKeys = import.meta.env.VITE_KEY_EMAILJS;
 
 const User = ()=> {
     const {isLoading, user, isAuthenticated} = useAuth0();
-    // console.log(user);
+    const [loading, setLoading] = useState(false);
     const postEmail = (e) => {
       e.preventDefault();
+      setLoading(true);
       emailjs.sendForm(
         serviceId,
         temId,
@@ -22,6 +24,7 @@ const User = ()=> {
       )
       .then(
         (response) => {
+          setLoading(false);
           console.log(response);
           toast.success(`Send success`);
         },
@@ -30,14 +33,13 @@ const User = ()=> {
           toast.error(`Send fail!`);
         }
       )
-      
     }
     return (
       <>
         {isAuthenticated && (
           <div className="container">
             <div className="user-info">
-              <img src={user.picture} alt={user.name} className="avatar" />
+              <img src={user?.picture} alt={user.name} className="avatar" />
               {(user.name || user.nickname) && (
                 <h2>Hello, {user.name || user.nickname}</h2>
               )}
@@ -83,9 +85,9 @@ const User = ()=> {
               </button>
             </form>
             <SignOut />
-            {isLoading && <Loading />}
           </div>
         )}
+        {(isLoading || loading) && <Loading />}
       </>
     );
 }
