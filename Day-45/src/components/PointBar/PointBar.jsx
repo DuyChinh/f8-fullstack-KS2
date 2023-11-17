@@ -3,12 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PointBar = ({ onValueChange }) => {
+const PointBar = () => {
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(false);
   const [inputValue, setInputValue] = useState(0);
   const [result, setResult] = useState(0);
+  const [times, setTimes] = useState(0);
   const barRef = useRef(null);
+  const inputRef = useRef(null);
   // console.log(barRef);
   const handleDrag = (e) => {
     const bar = barRef.current;
@@ -17,8 +19,10 @@ const PointBar = ({ onValueChange }) => {
     const pos = e.clientX - barLeft;
     const newValue = Math.round((pos / barWidth) * 2048);
     setValue(newValue);
-    onValueChange(newValue);
+    // onValueChange(newValue);
   };
+
+  
 
    const handleDragEnd = () => {
      // Xử lý sau khi kéo thả kết thúc (nếu cần)
@@ -34,26 +38,41 @@ const PointBar = ({ onValueChange }) => {
   const handleChange = (e) => {
     setInputValue(e.target.value);
   }
+  let MAX_TIME = Math.ceil(Math.log2(value));
+  if (MAX_TIME === -Infinity) {
+    MAX_TIME = 0;
+  }
 
+  //find result
   useEffect(() => {
     setResult(Math.floor(Math.random() * value) + 1);
+    setTimes(MAX_TIME);
   }, [value]);
 
+  useEffect(() => {
+    inputRef.current.value = "";
+    // console.log(inputRef);
+  }, [times])
+
+  //handle submit
   const handleSubmit = (e) => {
+    setTimes(times-1);
     e.preventDefault();
     console.log(result);
     if(inputValue < result) {
-      // console.log("MIN");
-      toast.success("lớn hơn đi bạn ơi!");
+      toast.error("lớn hơn đi bạn ơi!");
     } else if(+inputValue === +result) { 
-      // console.log("MAX");
        toast.success("Chúc mừng bạn, IQ của bạn thật cao cường!!!");
     } else {
-      toast.success("nhỏ hơn đi bạn ơi!");
+      toast.error("nhỏ hơn đi bạn ơi!");
     }
   }
   return (
     <>
+      <h2>
+        Còn {times >= 0 ? times : 0}/{MAX_TIME} lần
+      </h2>
+      <h3>Bạn cần tìm 1 số từ 1 đến {value}</h3>
       <div
         className="point-bar"
         ref={barRef}
@@ -82,9 +101,15 @@ const PointBar = ({ onValueChange }) => {
       </div>
 
       <form action="" className="form" onSubmit={handleSubmit}>
-          <input type="text" name="getNumber" id="number" onChange={handleChange}/>
+        <input
+          ref={inputRef}
+          type="text"
+          name="getNumber"
+          id="number"
+          onChange={handleChange}
+        />
       </form>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };
