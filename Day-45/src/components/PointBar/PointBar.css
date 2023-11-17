@@ -38,11 +38,15 @@
     background: yellowgreen;
 }
 
-#number {
+.form {
+    /* height: 35px; */
     margin-top: 20px;
+}
+
+#number {
     width: 99%;
-    height: 35px;
-    padding-left: 10px;
+    height: 15px;
+    padding: 10px;
     outline: none;
     border: 1px solid #ccc;
     border-radius: 4px;

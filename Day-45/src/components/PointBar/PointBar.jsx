@@ -2,6 +2,7 @@ import "./PointBar.css"
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Table from "../Table/Table";
 
 const PointBar = () => {
   const [value, setValue] = useState(0);
@@ -9,6 +10,7 @@ const PointBar = () => {
   const [inputValue, setInputValue] = useState(0);
   const [result, setResult] = useState(0);
   const [times, setTimes] = useState(0);
+  const [arr, setArr] = useState([]);
   const barRef = useRef(null);
   const inputRef = useRef(null);
   // console.log(barRef);
@@ -42,30 +44,41 @@ const PointBar = () => {
   if (MAX_TIME === -Infinity) {
     MAX_TIME = 0;
   }
-
+  // inputRef.current.focus();
   //find result
   useEffect(() => {
     setResult(Math.floor(Math.random() * value) + 1);
     setTimes(MAX_TIME);
+    inputRef.current.focus();
+    toast.success("Hello guys, let's playing game");
+    // console.log(arr);
+    localStorage.setItem("data", JSON.stringify(arr));
+    setArr([]);
   }, [value]);
 
   useEffect(() => {
     inputRef.current.value = "";
     // console.log(inputRef);
   }, [times])
-
   //handle submit
   const handleSubmit = (e) => {
-    setTimes(times-1);
     e.preventDefault();
     console.log(result);
-    if(inputValue < result) {
-      toast.error("lớn hơn đi bạn ơi!");
-    } else if(+inputValue === +result) { 
-       toast.success("Chúc mừng bạn, IQ của bạn thật cao cường!!!");
-    } else {
-      toast.error("nhỏ hơn đi bạn ơi!");
+  
+    if(inputValue < value) {
+      setTimes(times - 1);
+      const timePlay = MAX_TIME - times + 1;
+      setArr([...arr, { time: timePlay, value: inputValue }]);
+      if(inputValue < result) {
+        toast.error("lớn hơn đi bạn ơi!");
+      } else if(+inputValue === +result) { 
+          setTimes(0);
+          toast.success("Chúc mừng bạn, IQ của bạn thật cao cường!!!");
+      } else {
+        toast.error("nhỏ hơn đi bạn ơi!");
+      }
     }
+    
   }
   return (
     <>
@@ -104,11 +117,17 @@ const PointBar = () => {
         <input
           ref={inputRef}
           type="text"
-          name="getNumber"
+          name="number"
           id="number"
           onChange={handleChange}
         />
       </form>
+      {times === 0 &&
+        arr.map((test, index) => (
+          <h3 key={index}>
+            lần {test.time}: {test.value}
+          </h3>
+        ))}
       <ToastContainer />
     </>
   );
