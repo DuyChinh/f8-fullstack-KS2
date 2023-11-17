@@ -1,0 +1,22 @@
+.btn-mode {
+    position: fixed;
+    top: 20px;
+    right: 15px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    background: #93F9B9;
+    border-radius: 8px;
+}
+
+/* .btn-mode:hover {
+    background: #93F9B9;
+    border-radius: 8px;
+} */
+
+.fa-solid.fa-sun {
+    color: #fff;
+}
