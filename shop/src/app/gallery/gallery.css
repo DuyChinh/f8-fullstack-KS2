@@ -1,0 +1,75 @@
+.gallery {
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.gallery .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+
+.gallery .box-container .box {
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+    border: 1rem solid #fefefe;
+    border-radius: 0.5rem;
+    flex: 1 1 30rem;
+    height: 25rem;
+    position: relative;
+    /* transition: all 0.2s linear; */
+}
+
+.gallery .box-container .box img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery .box-container .box .content {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, .7);
+    padding: 2rem;
+    padding-top: 5rem;
+    transition: all 0.3s linear
+}
+
+.gallery .box-container .box:hover .content {
+    top: 0;
+}
+
+.gallery .box-container .box .content h3 {
+    margin-top: 10px;
+    font-size: 2.5rem;
+    color: #ffa500;
+}
+
+.gallery .box-container .box .content p {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #eee;
+    padding: 0.5rem 0;
+}
+
+.gallery .box-container .box .content a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 2rem;
+    color: #eee;
+    padding: 0.5rem 2rem;
+    background: #ffa500;
+    border-radius: 999px;
+}
+
+.gallery .box-container .box .content a:hover {
+    border: 1px solid #ffa500;
+    background: transparent;
+    color: #ffa500;
+}

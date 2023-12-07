@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -31,15 +30,14 @@ video {
 
 .slick-dots li button:before {
     font-size: 18px;
-    color: orangered;
+    color: orange;
 }
 
 .slick-dots li.slick-active button:before {
     color: orangered;
 }
 
-.slick-arrow.slick-prev 
- {
+.slick-arrow.slick-prev {
     visibility: hidden;
     position: absolute;
     left: 0;
@@ -56,4 +54,43 @@ video {
     top: 50;
     /* transform: translateX(-50%) translateY(-50%); */
     color: blue;
+}
+
+.home .content-first {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+}
+
+.content-first h3 {
+    color: #EB3349;
+    font-size: 4rem;
+    text-transform: uppercase;
+    text-shadow: 0 0.3em 0.5em rgba(0, 0, 0, .3);
+}
+
+.content-first p {
+    margin-top: 10px;
+    font-size: 2.5rem;
+    color: #fefefe;
+    padding: 0.5rem 0;
+}
+
+.content-first .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: #ffa500;
+    color: #fefefe;
+    padding: 0.8rem 3rem;
+    border: 0.2rem solid #ffa500;
+    cursor: pointer;
+    font-size: 1.7rem;
+}
+
+.content-first .btn:hover {
+    background: rgba(255, 165, 0, .2);
+    color: var(--orange);
+    font-weight: 600;
 }
