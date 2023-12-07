@@ -7,6 +7,7 @@ import Services from "./services/page";
 import Review from "./review/page";
 import Contact from "./contact/page";
 import Footer from "@/components/Footer/Footer";
+
 const Home = ()=> {
   return (
     <div className="home" id="home">

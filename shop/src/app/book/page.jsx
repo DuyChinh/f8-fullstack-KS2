@@ -1,5 +1,32 @@
+"use client"
 import "./book.css"
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 const Book  = ()=> {
+  const sendEmail = (e) => {
+    // console.log(e.target.user_email.value);
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_4eg9gbp",
+        "template_gp1shvc",
+        e.target,
+        "0PHh84RgUESTGyR9Z"
+      )
+      .then(
+        (result) => {
+          console.log(result);
+          console.log("sent");
+          toast.success(`Cảm ơn bạn đã đặt lịch! Chúng tôi sẽ liên hệ lại sớm!`);
+        },
+        (error) => {
+          console.log(error);
+          toast.error(`Send fail!`);
+        }
+      );
+  };
+
   return (
     <div className="book" id="book">
       <h1 className="heading">
@@ -19,10 +46,14 @@ const Book  = ()=> {
         <div className="image">
           <img src="images/book-img.svg" alt="img" />
         </div>
-        <form>
+        <form onSubmit={sendEmail}>
           <div className="inputBox">
             <h3>Hãy liên hệ với tôi bằng :</h3>
-            <input type="text" placeholder="Email hoặc số điện thoại" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email hoặc số điện thoại"
+            />
           </div>
           <div className="inputBox">
             <h3>Tôi muốn đến :</h3>
@@ -99,10 +130,10 @@ const Book  = ()=> {
               <option value="Kenya">Kenya</option>
               <option value="Kiribati">Kiribati</option>
               <option value="Democratic People's Republic of Korea">
-                Korea, Democratic People's Republic of
+                Korea, Democratic of
               </option>
               <option value="Kuwait">Kuwait</option>
-              <option value="Lao">Lao People's Democratic Republic</option>
+              <option value="Lao">Lao Democratic Republic</option>
               <option value="Liberia">Liberia</option>
               <option value="Lithuania">Lithuania</option>
               <option value="Macau">Macau</option>
@@ -177,22 +208,36 @@ const Book  = ()=> {
               <option value="Zambia">Zambia</option>
               <option value="Zimbabwe">Zimbabwe</option>
             </select>
-            <input type="text" placeholder="Địa điểm chính xác" />
+            <input
+              type="text"
+              name="address"
+              placeholder="Địa điểm chính xác"
+            />
           </div>
           <div className="inputBox">
             <h3>Chúng tôi có :</h3>
-            <input type="number" placeholder="Số người" />
+            <input type="number" name="number_people" placeholder="Số người" />
           </div>
           <div className="inputBox">
             <h3>bắt đầu từ :</h3>
-            <input type="date" />
+            <input type="date" name="start_date" />
           </div>
           <div className="inputBox">
             <h3>Kết thúc vào :</h3>
-            <input type="date" />
+            <input type="date" name="end_date" />
           </div>
-          <input type="submit" className="btn" defaultValue="Tìm Ngay" />
+
+          <input type="submit" className="btn" value="Đặt ngay" />
         </form>
+        {/* <form  onSubmit={sendEmail}>
+          <label>Name</label>
+          <input type="text" name="user_name" />
+          <label>Email</label>
+          <input type="email" name="user_email" />
+          <label>Message</label>
+          <textarea name="message" />
+          <input type="submit" value="Send" />
+        </form> */}
       </div>
     </div>
   );

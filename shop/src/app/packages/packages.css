@@ -11,6 +11,7 @@
 }
 
 #packages .box {
+    background: #fff;
     flex: 1 1 30rem;
     border-radius: 0.5rem;
     overflow: hidden;
