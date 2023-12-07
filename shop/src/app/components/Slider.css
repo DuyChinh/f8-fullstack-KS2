@@ -1,0 +1,59 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+video {
+    background: linear-gradient(to right, rgb(29, 151, 108), rgb(147, 249, 185));
+    width: 100%;
+    /* height: 100vh; */
+}
+
+.slick {
+    width: 100%;
+    height: 100%;
+}
+
+.slick-slider {
+    /* margin: 0; */
+    /* width: 100vw; */
+}
+
+.slick-dots {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100px;
+    height: 30px;
+}
+
+.slick-dots li button:before {
+    font-size: 18px;
+    color: orangered;
+}
+
+.slick-dots li.slick-active button:before {
+    color: orangered;
+}
+
+.slick-arrow.slick-prev 
+ {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 50;
+    /* transform: translateX(-50%) translateY(-50%); */
+    color: blue;
+}
+
+.slick-arrow.slick-next {
+    /* display: none; */
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 50;
+    /* transform: translateX(-50%) translateY(-50%); */
+    color: blue;
+}
