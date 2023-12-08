@@ -1,6 +1,31 @@
+"use client"
 import "./review.css"
-
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 function Review() {
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_4eg9gbp",
+        "template_gp1shvc",
+        e.target,
+        "0PHh84RgUESTGyR9Z"
+      )
+      .then(
+        (result) => {
+          console.log(result);
+          console.log("sent");
+          toast.success(
+            `Cảm ơn bạn đã đặt lịch! Chúng tôi sẽ liên hệ lại sớm!`
+          );
+        },
+        (error) => {
+          console.log(error);
+          toast.error(`Send fail!`);
+        }
+      );
+  };
   return (
     <div className="review" id="review">
       <h1 className="heading">
@@ -33,13 +58,14 @@ function Review() {
               </div> */}
             </div>
           </div>
-          <form>
+          <form onSubmit={sendEmail}>
             <div className="inputBox">
               <textarea
                 placeholder="viết đánh giá của bạn"
-                name="rate"
+                name="message"
                 cols={30}
                 rows={15}
+               
                 defaultValue={""}
               />
             </div>

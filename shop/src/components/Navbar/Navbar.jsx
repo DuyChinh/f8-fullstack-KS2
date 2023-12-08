@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 
-// import DevMode from "../DevMode/DevMode";
+import DevMode from "../DevMode/DevMode";
 const Navbar = ()=> {
   return (
     <div className="navbar">
@@ -39,7 +39,7 @@ const Navbar = ()=> {
       </ul>
 
       <div className="nav-action">
-        {/* <DevMode /> */}
+        <DevMode />
         <i>
           <FaSearch />
         </i>
