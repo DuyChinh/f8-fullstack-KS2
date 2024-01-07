@@ -2,7 +2,7 @@ import "./PointBar.css"
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Table from "../Table/Table";
+
 
 const PointBar = () => {
   const [value, setValue] = useState(0);
@@ -26,9 +26,8 @@ const PointBar = () => {
 
   
 
-   const handleDragEnd = () => {
-     // Xử lý sau khi kéo thả kết thúc (nếu cần)
-   };
+  const handleDragEnd = () => {
+  };
 
   const turnOnHover = () => {
     setHover(true);
@@ -52,7 +51,8 @@ const PointBar = () => {
     inputRef.current.focus();
     toast.success("Hello guys, let's playing game");
     // console.log(arr);
-    localStorage.setItem("data", JSON.stringify(arr));
+      localStorage.setItem("data", JSON.stringify(arr));
+    
     setArr([]);
   }, [value]);
 
@@ -64,11 +64,11 @@ const PointBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(result);
-  
     if(inputValue < value) {
       setTimes(times - 1);
       const timePlay = MAX_TIME - times + 1;
       setArr([...arr, { time: timePlay, value: inputValue }]);
+      
       if(inputValue < result) {
         toast.error("lớn hơn đi bạn ơi!");
       } else if(+inputValue === +result) { 
@@ -80,6 +80,7 @@ const PointBar = () => {
     }
     
   }
+  
   return (
     <>
       <h2>
@@ -122,12 +123,28 @@ const PointBar = () => {
           onChange={handleChange}
         />
       </form>
-      {times === 0 &&
-        arr.map((test, index) => (
-          <h3 key={index}>
-            lần {test.time}: {test.value}
-          </h3>
-        ))}
+      {times === 0 && result!=1 && (
+        <>
+          <table className="table">
+            <tr>
+              <th>Lần</th>
+              <th>Số bạn nhập</th>
+            </tr>
+            {arr.map((item, index) => (
+            <tr key={index}>
+              <th>{item.time}</th>
+              <th>{item.value}</th>
+            </tr>
+            ))}
+          </table>
+          { <h2>Kết quả là: {result}</h2>}
+        </>
+      )}
+      {/* <div>
+        <input type="range" min="0" max="2048" step={1}/>
+      </div> */}
+      {/* {times === 0 && <Table />} */}
+      {/* <Table/> */}
       <ToastContainer />
     </>
   );

@@ -17,6 +17,7 @@
 }
 
 .display-value {
+    user-select: none;
     position: absolute;
     top: -30px;
     left: 500px;
@@ -52,4 +53,15 @@
     border-radius: 4px;
     font-size: 1rem;
     color: blue;
+}
+
+table {
+    margin-top: 20px;
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid blue;
 }
