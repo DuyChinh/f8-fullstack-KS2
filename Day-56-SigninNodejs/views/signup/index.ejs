@@ -6,7 +6,8 @@
     <title>Sign up</title>
 </head>
 <body>
-    <h1 class="text-center">Sign up</h1>
+    <h1 class="text-center">Register</h1>
+    <%-msgRegister.length? `<div class="alert alert-danger">${msgRegister}</div>`: ''   %>
     <form action="" method="post">
         <div class="mb-3">
             <label for="">Email</label>
@@ -16,10 +17,16 @@
 
         <div class="mb-3">
             <label for="">Password</label>
-            <input type="text" name="password" class="form-control" placeholder="Password...">
+            <input type="text" name="password" class="form-control mt-1" placeholder="Password...">
             <p class="text-danger"><%=req.errors.password %></p>
         </div>
-        <button type="submit" class="btn btn-info text-white">Sign up</button>
+
+        <div class="mb-3">
+            <label for="">Confirm password</label>
+            <input type="text" name="confirmPassword" class="form-control mt-1" placeholder="Confirm password...">
+            <p class="text-danger"><%=req.errors.confirmPassword %></p>
+        </div>
+        <button type="submit" class="btn btn-info text-white">Register</button>
     </form>
 </body>
 </html>

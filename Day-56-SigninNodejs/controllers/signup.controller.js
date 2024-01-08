@@ -7,31 +7,35 @@ const User = model.User;
 module.exports = {
   index: (req, res) => {},
   signUp: (req, res) => {
+    const msgRegister = req.flash("msg-register");
     if(req.session.logIn) {
         res.redirect("/");
     }
-    res.render("signup/index", { req });
+    res.render("signup/index", { req, msgRegister });
   },
   handleSignUp: async(req, res) => {
     const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    console.log(confirmPassword," ", password);
     const email = req.body.email;
     const body = await req.validate(req.body, {
       email: string()
         .required("Please enter email!")
         .email("Invalid email format!")
-        .test("check-unique", "Email already exists!", async(value) => {
-            // console.log("value", value);
-            const existingUser = await User.findAll({
-              where: {
-                email: value,
-              },
-            });
-            // console.log("existingUser", existingUser);
-            return existingUser.length === 0;
+        .test("check-unique", "Email already exists!", async (value) => {
+          // console.log("value", value);
+          const existingUser = await User.findAll({
+            where: {
+              email: value,
+            },
+          });
+          // console.log("existingUser", existingUser);
+          return existingUser.length === 0;
         }),
       password: string().required("Please enter password!"),
+      confirmPassword: string().required("Please enter password!"),
     });
-    if(body) {
+    if(body && +password === +confirmPassword) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         const username = email.split("@")[0];
@@ -40,8 +44,14 @@ module.exports = {
             email: email,
             password: hash,
         });
-        req.flash("msg-register", "Register successful! Please Sign in!");
-        return res.redirect("/signin");
+        // req.flash("msg-register", "Register successful! Please Sign in!");
+        req.session.username = username;
+        req.session.logIn = true;
+        return res.redirect("/");
+        // return res.redirect("/signin");
+    }
+    if (password !== confirmPassword) {
+      req.flash("msg-register", "passwords do not match!Please check confirm password again!");
     }
     res.redirect("/signup");
   }
