@@ -43,14 +43,27 @@ module.exports = {
       const users = await User.findAll({
         where: filters,
       });
-      console.log(users);
-      if(users.length && bcrypt.compareSync(password, users[0].password)) {
+      // console.log(users);
+      const statusUser = users[0]?.status;
+      // console.log(statusUser);
+      if(users.length && bcrypt.compareSync(password, users[0].password) && statusUser) {
         // console.log("user2",users);
         req.session.username = users[0].name;
         req.session.logIn = true;
         return res.redirect("/");
-      } else {
-        req.flash("msg", "Email or Password is incorrect. Please try again!");
+      } else { 
+        if (users.length && bcrypt.compareSync(password, users[0].password) && !statusUser) {
+          req.flash("msg", "Status is inactive");
+        } else {
+          if (!users.length) {
+            req.flash("msg", "Account isn't exist!");
+          } else {
+            req.flash(
+              "msg",
+              "Email or Password is incorrect. Please try again!"
+            );
+          }
+        }
         req.session.logIn = false;
       }
     }

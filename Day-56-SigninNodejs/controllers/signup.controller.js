@@ -8,9 +8,9 @@ module.exports = {
   index: (req, res) => {},
   signUp: (req, res) => {
     const msgRegister = req.flash("msg-register");
-    if(req.session.logIn) {
-        res.redirect("/");
-    }
+    // if(req.session.logIn) {
+    //     res.redirect("/");
+    // }
     res.render("signup/index", { req, msgRegister });
   },
   handleSignUp: async(req, res) => {
@@ -44,11 +44,11 @@ module.exports = {
             email: email,
             password: hash,
         });
-        // req.flash("msg-register", "Register successful! Please Sign in!");
-        req.session.username = username;
-        req.session.logIn = true;
-        return res.redirect("/");
-        // return res.redirect("/signin");
+        req.flash("msg-register", "Register successful! Please Sign in!");
+        // req.session.username = username;
+        // req.session.logIn = true;
+        // return res.redirect("/");
+        return res.redirect("/signin");
     }
     if (password !== confirmPassword) {
       req.flash("msg-register", "passwords do not match!Please check confirm password again!");

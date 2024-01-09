@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>Register</title>
 </head>
 <body>
     <h1 class="text-center">Register</h1>
@@ -26,7 +26,8 @@
             <input type="text" name="confirmPassword" class="form-control mt-1" placeholder="Confirm password...">
             <p class="text-danger"><%=req.errors.confirmPassword %></p>
         </div>
-        <button type="submit" class="btn btn-info text-white">Register</button>
+        <button type="submit" class="btn btn-info text-white" style="width: 100%;">Register</button>
+        <a href="/signin" class="btn btn-primary text-white mt-3" style="width: 100%;">Sign in</a>
     </form>
 </body>
 </html>

@@ -6,6 +6,7 @@ var logger = require('morgan');
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const flash = require("connect-flash");
+var favicon = require("serve-favicon");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,6 +14,7 @@ const validateMidlleware = require("./middleware/validate.middleware");
 
 
 var app = express();
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(
   session({
     secret: "signin",
