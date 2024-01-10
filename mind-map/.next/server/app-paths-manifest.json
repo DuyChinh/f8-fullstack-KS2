@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/my-mindmap/page": "app/my-mindmap/page.js",
+  "/my-mindmap/[id]/page": "app/my-mindmap/[id]/page.js",
+  "/api/auth/[auth0]/route": "app/api/auth/[auth0]/route.js",
+  "/(client)/about/page": "app/(client)/about/page.js"
+}

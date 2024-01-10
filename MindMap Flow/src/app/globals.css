@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-weight: 500;
+    /* font-size: 17px; */
+    overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b8b8b8;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+.content {
+    max-width: 1170px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 25px;
+}
+
+.header.active {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #26de81;
+    /* box-shadow: 0 10px 30px -10px #26de81; */
+    color: white;
+    border-radius: 99px;
+    min-height: 40px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: #f83f3f;
+    /* box-shadow: 0 10px 30px -10px #f95757; */
+    color: white;
+    min-height: 40px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    /* background-color: #26de81;
+     */
+     opacity: 0.9;
+     color: #333;
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+    /* background-color: #f83f3f; */
+    color: #333;
+}
+
+.home .banner {
+    background: url('../../public/image/banner-home.svg') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.heading-1 {
+    font-size: 80px;
+    line-height: 1;
+    font-weight: bold;
+    color: #3d474d;
+}
+
+.heading-2 {
+    font-size: 32px;
+    color: #3d474d80;
+    font-weight: 500;
+}
+
+.list-features {
+    background: url('../../public/image/bg-features.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+}
+
+/* text-updater-node */
+.text-updater-node {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #f83f3f;
+    border-radius: 4px;
+    font-size: 12px;
+    min-width: 150px;
+}
+
+.text-updater-node.clicked {
+    outline: 0.5px solid #f83f3f;
+    border-color: #f83f3f;
+}
+
+.node-item {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-item input {
+    outline: none;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    height: 20px;
+    width: 130px;
+}
+
+/* AddNodeOnEdgeDrop */
+.react-flow .react-flow__handle {
+    width: 28px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: #16e77f;
+}
+
+.react-flow .react-flow__handle-top {
+    top: -6px;
+}
+
+.react-flow .react-flow__handle-bottom {
+    bottom: -6px;
+}
+
+
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+    stroke-width: 1.5;
+    stroke: #d9ff00;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+    stroke: red !important;
+}
+
+.wrapper {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.react-flow__node-input {
+    border-width: 1.5px !important;
+    border-color: #f9578d !important;
+}
+
+.react-flow__node-input.selectable.selected,
+.react-flow__node-input.selectable:focus {
+    box-shadow: none !important;
+}
+
+/* custom radio */
+input[type='radio']+label span {
+    transition: background 0.2s, transform 0.2s;
+}
+
+input[type='radio']+label span:hover,
+input[type='radio']+label:hover span {
+    transform: scale(1.2);
+}
+
+input[type='radio']:checked+label span {
+    background-color: #3490dc;
+    box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type='radio']:checked+label {
+    color: #3490dc;
+}
+
+.mode:has([type='radio']#radio1:checked)~.public {
+    display: none;
+}
+
+.mode:has([type='radio']#radio2:checked)~.private {
+    display: none;
+}
+
+.clipboard:hover+.copy {
+    opacity: 1;
+}
+
+/* Loading */
+
+.loader {
+    border: 6px solid rgba(216, 248, 234, 0.88);
+    border-top-color: #26de81;
+    border-radius: 50%;
+    width: 3.2rem;
+    height: 3.2rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*  */
+.avatar,
+.dropdown-avt {
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    scale: 0.95;
+}
+
+.avatar {
+    background: #f83f3f;
+}
+
+div:has(.show-avatar) .avatar {
+    border-color: #00aaff;
+    scale: 0.95;
+}
+
+.show-avatar {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
