@@ -32,10 +32,12 @@ module.exports = {
           // console.log("existingUser", existingUser);
           return existingUser.length === 0;
         }),
-      password: string().required("Please enter password!"),
+      password: string()
+        .min(6, "Please enter a password of at least 6 characters.")
+        .required("Please enter password!").matches(/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/, 'Password must contain at least one letter'),
       confirmPassword: string().required("Please enter password!"),
     });
-    if(body && +password === +confirmPassword) {
+    if(body && password === confirmPassword) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         const username = email.split("@")[0];
@@ -45,9 +47,6 @@ module.exports = {
             password: hash,
         });
         req.flash("msg-register", "Register successful! Please Sign in!");
-        // req.session.username = username;
-        // req.session.logIn = true;
-        // return res.redirect("/");
         return res.redirect("/signin");
     }
     if (password !== confirmPassword) {
