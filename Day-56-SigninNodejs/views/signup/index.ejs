@@ -17,13 +17,13 @@
 
         <div class="mb-3">
             <label for="">Password</label>
-            <input type="text" name="password" class="form-control mt-1" placeholder="Password...">
+            <input type="password" name="password" class="form-control mt-1" placeholder="Password...">
             <p class="text-danger"><%=req.errors.password %></p>
         </div>
 
         <div class="mb-3">
             <label for="">Confirm password</label>
-            <input type="text" name="confirmPassword" class="form-control mt-1" placeholder="Confirm password...">
+            <input type="password" name="confirmPassword" class="form-control mt-1" placeholder="Confirm password...">
             <p class="text-danger"><%=req.errors.confirmPassword %></p>
         </div>
         <button type="submit" class="btn btn-info text-white" style="width: 100%;">Register</button>
