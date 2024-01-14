@@ -34,7 +34,7 @@ module.exports = {
         }),
       password: string()
         .min(6, "Please enter a password of at least 6 characters.")
-        .required("Please enter password!").matches(/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/, 'Password must contain at least one letter'),
+        .required("Please enter password!"),
       confirmPassword: string().required("Please enter password!"),
     });
     if(body && password === confirmPassword) {

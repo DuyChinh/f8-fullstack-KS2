@@ -5,7 +5,42 @@
   </head>
   <body>
     <h1>Home Page</h1>
-    <h4>Hello, <%-username.length? username: '' %></h1>
+    <h4>Hello, <%=userArr[0]?.name %></h1>
     <a href="/signout" class="btn btn-info text-white">Logout</a>
+    <div class="">
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr>
+            <th width="5%">Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th width="10%">Password</th>
+            <th>Status</th>
+            <th>Created_at</th>
+            <th>Updated_at</th>
+          </tr>
+
+
+        </thead>
+        <tbody>
+          <% userArr?.forEach((user) => { %>
+          <tr>
+            <td><%= user.id  %></td>
+            <td><%= user.name  %></td>
+            <td><%= user.email  %></td>
+            <td>
+              <%= user.password %>
+              <a href="/changePassword/<%=user.id %>" class="btn btn-info mt-2 text-white">Change password</a>
+            </td>
+            
+            <td><%= user.status ? 'Kích hoạt' : 'Chưa kích hoạt' %></td>
+             <td><%=moment(user.created_at).format('DD/MM/YYYY HH:mm:ss')%></td>
+             <td><%=moment(user.updated_at).format('DD/MM/YYYY HH:mm:ss')%></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
+
