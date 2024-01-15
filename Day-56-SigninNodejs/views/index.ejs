@@ -50,6 +50,7 @@
             <th>Os</th>
             <th>Browser</th>
             <th>Time login</th>
+            <th>Last operating time</th>
             <th width="5%">User_id</th>
             <th>Status Login</th>
             <th>Action</th>
@@ -63,12 +64,19 @@
             <td><%= device.os  %></td>
             <td><%= device.browser  %></td>
             <td><%=moment(device.time).format('DD/MM/YYYY HH:mm:ss')%></td>
+            <td><%=moment(device.LastTimeLogin).format('DD/MM/YYYY HH:mm:ss')%></td>
             <td><%= device.user_id %></td>
-            <td><%= device.status %></td>
+            <td><%= device.status?'đăng nhập': 'đã đăng xuất' %></td>
             <td>
-              <form action="/logout/<%=device.user_id %>" method="post">
+              
+             <% if (device.status) { %>
+              <form action="/logout/<%= device.id %>" method="post">
                 <button class="btn btn-danger">Logout Device</button>
               </form>
+              <% } else { %>
+              <!-- <a href="/" class="btn btn-success">Logout success</a> -->
+              <div class="alert alert-success">Logout success</div>
+             <% } %>
             </td>
           </tr>
           <% }) %>

@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       token: DataTypes.STRING,
       status: DataTypes.BOOLEAN,
+      LastTimeLogin: DataTypes.DATE,
     },
     {
       sequelize,

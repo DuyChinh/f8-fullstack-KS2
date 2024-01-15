@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const model = require("../models/index");
 const User = model.User;
+const Device = model.Device;
 const checkToken = require("../middleware/checkToken.middleware");
+const { where } = require("sequelize");
 module.exports = {
   changePassword: (req, res) => {
     // console.log(req.params.id);
@@ -40,7 +42,14 @@ module.exports = {
                 },
               }
             );
-            req.session.logIn = false;
+            // req.session.logIn = false;
+            //Logout all device
+            // const devices = Device.findAll({
+            //   where: {
+            //     user_id: id
+            //   }
+            // });
+            await Device.update({ status: false }, { where: { user_id: id } });
             return res.redirect("/signin");
 
             // req.flash("msg", "Change password successful.");

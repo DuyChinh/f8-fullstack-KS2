@@ -15,19 +15,33 @@ const secretKey = "duychinh21";
 module.exports = {
   index: async(req, res, next) => {
     const users = req.session.user;
-    // const check = await req.checkToken(req.session.tokenUser);
-    const check = await checkToken(
-      req,
-      res,
-      next
-    )(req.session.tokenUser);
-    // console.log(req.session.tokenUser);
-    // let check = await checkToken(req.session.tokenUser);
-    console.log("check", check);
-    // if(!check) {
-    //   req.session.logIn = false;
-    // }
-    if (req.session.logIn) {
+    let check = true;
+    const token = req.session.tokenUser;
+    if(token) {
+      const device = await Device.findOne({
+        where: {
+          token: token,
+        },
+      });
+      if(!device || !device.status) {
+        check = false;
+      }
+      // console.log("check", check);
+    }
+    
+    if(!check) {
+      const currentTime = moment().utcOffset(7);
+      await Device.update(
+        { LastTimeLogin: currentTime },
+        {
+          where: {
+            token: token,
+          },
+        }
+      );
+      req.session.logIn = false;
+    }
+    if (req.session.logIn && check) {
       // checkTokenValidity(req, res, next);
       const devices = await Device.findAll();
       return res.render("index", { users, moment, devices });
@@ -93,12 +107,14 @@ module.exports = {
         // await Device.update({ token }, { where: { id: req.session.deviceId } });
         // const dateHeaderValue = req.headers["date"];
         const time = moment().utcOffset(7);
+        const LastTimeLogin = time;
         // const vnTime = moment(date).format("DD/MM/YYYY HH:mm:ss");
         // console.log(vnTime);
         await Device.create({
           os,
           browser,
           time,
+          LastTimeLogin,
           user_id: users[0].id,
           token,
         });
@@ -142,8 +158,10 @@ module.exports = {
 
   handleLogout: async(req, res) => {
     const { id } = req.params;
-    // console.log(req.body);
-    await Device.update({ status: false }, { where: { user_id: id } });
+    // console.log(req);
+    // console.log(token);
+    
+    await Device.update({ status: false }, { where: { id: id } });
     return res.redirect("/");
   }
 };
