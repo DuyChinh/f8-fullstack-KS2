@@ -5,9 +5,9 @@
   </head>
   <body>
     <h1>Home Page</h1>
-    <h4>Hello, <%=userArr[0]?.name %></h1>
+    <h4>Hello, <%=users[0]?.name %></h1>
     <a href="/signout" class="btn btn-info text-white">Logout</a>
-    <div class="">
+    <div class="mb-3">
       <table class="table table-bordered mt-2">
         <thead>
           <tr>
@@ -23,7 +23,7 @@
 
         </thead>
         <tbody>
-          <% userArr?.forEach((user) => { %>
+          <% users?.forEach((user) => { %>
           <tr>
             <td><%= user.id  %></td>
             <td><%= user.name  %></td>
@@ -36,6 +36,40 @@
             <td><%= user.status ? 'Kích hoạt' : 'Chưa kích hoạt' %></td>
              <td><%=moment(user.created_at).format('DD/MM/YYYY HH:mm:ss')%></td>
              <td><%=moment(user.updated_at).format('DD/MM/YYYY HH:mm:ss')%></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mb-3">
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr>
+            <th width="5%">Id</th>
+            <th>Os</th>
+            <th>Browser</th>
+            <th>Time login</th>
+            <th width="5%">User_id</th>
+            <th>Status Login</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <% devices.forEach((device) => { %>
+          <tr>
+            <td><%= device.id  %></td>
+            <td><%= device.os  %></td>
+            <td><%= device.browser  %></td>
+            <td><%=moment(device.time).format('DD/MM/YYYY HH:mm:ss')%></td>
+            <td><%= device.user_id %></td>
+            <td><%= device.status %></td>
+            <td>
+              <form action="/logout/<%=device.user_id %>" method="post">
+                <button class="btn btn-danger">Logout Device</button>
+              </form>
+            </td>
           </tr>
           <% }) %>
         </tbody>

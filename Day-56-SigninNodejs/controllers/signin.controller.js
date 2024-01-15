@@ -6,16 +6,31 @@ const model = require("../models/index");
 const { Op } = require("sequelize");
 const User = model.User;
 const moment = require("moment");
-module.exports = {
-  index: (req, res) => {
-    const user = req.session.user;
-    // console.log(user);
-    const userArr = Array.from(user);
-    // console.log(userArr[0].name);
+const Device = model.Device;
+const checkToken = require("../middleware/checkToken.middleware");
+//jwt
+const jwt = require("jsonwebtoken");
+const secretKey = "duychinh21";
 
-    // console.log(user);
+module.exports = {
+  index: async(req, res, next) => {
+    const users = req.session.user;
+    // const check = await req.checkToken(req.session.tokenUser);
+    const check = await checkToken(
+      req,
+      res,
+      next
+    )(req.session.tokenUser);
+    // console.log(req.session.tokenUser);
+    // let check = await checkToken(req.session.tokenUser);
+    console.log("check", check);
+    // if(!check) {
+    //   req.session.logIn = false;
+    // }
     if (req.session.logIn) {
-      return res.render("index", { userArr, moment});
+      // checkTokenValidity(req, res, next);
+      const devices = await Device.findAll();
+      return res.render("index", { users, moment, devices });
     }
     return res.redirect("/signin");
   },
@@ -55,8 +70,10 @@ module.exports = {
       // console.log(statusUser);
       if(users.length && bcrypt.compareSync(password, users[0].password) && statusUser) {
         // console.log("user2",users);
+        req.flash("users", users);
         req.session.user = users;
-        req.session.username = users[0].name;
+        req.session.userId = users[0].id;
+        // req.session.username = users[0].name;
         req.session.logIn = true;
 
         let parser = new UAParser("user-agent"); // you need to pass the user-agent for nodejs
@@ -64,16 +81,30 @@ module.exports = {
         parser.setUA(uastring1);
     
         // console.log(parser); 
-        let parserResults = parser.getResult();
-        console.log(parserResults);
+        let res = parser.getResult();
+        // console.log(parserResults);
+        const browser = res.browser.name;
+        const os = res.os.name;
 
+        const token = jwt.sign({ deviceId: req.session.deviceId }, secretKey);
+        req.session.tokenUser = token;
+
+        // Lưu token vào cơ sở dữ liệu
+        // await Device.update({ token }, { where: { id: req.session.deviceId } });
         // const dateHeaderValue = req.headers["date"];
-        const date = moment().utcOffset(7);
-        const vnTime = moment(date).format("DD/MM/YYYY HH:mm:ss");
-        console.log(vnTime);
+        const time = moment().utcOffset(7);
+        // const vnTime = moment(date).format("DD/MM/YYYY HH:mm:ss");
+        // console.log(vnTime);
+        await Device.create({
+          os,
+          browser,
+          time,
+          user_id: users[0].id,
+          token,
+        });
 
        
-        return res.redirect("/");
+        // return res.redirect("/");
       } else { 
         if (users.length && bcrypt.compareSync(password, users[0].password) && !statusUser) {
           req.flash("msg", "Status is inactive");
@@ -104,8 +135,15 @@ module.exports = {
 
   },
 
-  handleLogout: (req, res) => {
+  handleSignout: (req, res) => {
     req.session.logIn = false;
     return res.redirect("/signin");
+  },
+
+  handleLogout: async(req, res) => {
+    const { id } = req.params;
+    // console.log(req.body);
+    await Device.update({ status: false }, { where: { user_id: id } });
+    return res.redirect("/");
   }
 };

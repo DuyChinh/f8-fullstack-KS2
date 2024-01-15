@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
             const errors = Object.fromEntries(
                 e.inner.map((item) => [item.path, item.message])
             );
-            console.log(errors);
+            // console.log(errors);
             req.flash("errors", errors);
         }
         // res.send("submit");

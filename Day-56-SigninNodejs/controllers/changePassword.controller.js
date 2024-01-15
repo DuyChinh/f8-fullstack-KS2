@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const model = require("../models/index");
 const User = model.User;
+const checkToken = require("../middleware/checkToken.middleware");
 module.exports = {
   changePassword: (req, res) => {
     // console.log(req.params.id);

@@ -7,9 +7,13 @@ var changePasswordController = require("../controllers/changePassword.controller
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' });
 // });
+// var checkTokenValidity = require("../middleware/checkToken.middleware");
 
 router.get("/", signInController.index);
-router.get("/signout", signInController.handleLogout);
+router.get("/signout", signInController.handleSignout);
+
+router.post("/logout/:id", signInController.handleLogout);
+
 router.get("/signin", signInController.signIn);
 router.post("/signin", signInController.handleSignIn);
 
