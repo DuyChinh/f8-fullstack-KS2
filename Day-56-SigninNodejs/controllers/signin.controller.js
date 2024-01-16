@@ -26,13 +26,13 @@ module.exports = {
       // });
       // if(!device || !device.status) {
       //   check = false;
-      //   req.flash("msg", "Bạn đã bị đăng xuất!");
       // }
       // // console.log("check", check);
       check = await req.checkToken(token);
     }
     
     if(!check) {
+      req.flash("msg", "Bạn đã bị đăng xuất!");
       const currentTime = moment().utcOffset(7);
       await Device.update(
         { LastTimeLogin: currentTime },
