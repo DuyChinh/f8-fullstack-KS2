@@ -15,6 +15,7 @@ const secretKey = "duychinh21";
 module.exports = {
   index: async(req, res, next) => {
     const users = req.session.user;
+    
     let check = true;
     const token = req.session.tokenUser;
     if(token) {
@@ -25,6 +26,7 @@ module.exports = {
       });
       if(!device || !device.status) {
         check = false;
+        req.flash("msg", "Bạn đã bị đăng xuất!");
       }
       // console.log("check", check);
     }
@@ -157,6 +159,23 @@ module.exports = {
   },
 
   handleLogout: async(req, res) => {
+    let check = true;
+    const token = req.session.tokenUser;
+    if (token) {
+      const device = await Device.findOne({
+        where: {
+          token: token,
+        },
+      });
+      if (!device || !device.status) {
+        check = false;
+      }
+      // console.log("check", check);
+    }
+
+    if (!check) {
+      return res.redirect("/");
+    }
     const { id } = req.params;
     // console.log(req);
     // console.log(token);

@@ -7,7 +7,24 @@ const Device = model.Device;
 const checkToken = require("../middleware/checkToken.middleware");
 const { where } = require("sequelize");
 module.exports = {
-  changePassword: (req, res) => {
+  changePassword: async(req, res) => {
+    let check = true;
+    const token = req.session.tokenUser;
+    if (token) {
+      const device = await Device.findOne({
+        where: {
+          token: token,
+        },
+      });
+      if (!device || !device.status) {
+        check = false;
+      }
+      // console.log("check", check);
+    }
+
+    if (!check) {
+      return res.redirect("/");
+    }
     // console.log(req.params.id);
     const msg = req.flash("msg");
     // console.log(msg);
@@ -15,6 +32,7 @@ module.exports = {
   },
 
   handleChangePassword: async(req, res) => {
+    
     //  console.log(req);
     const data = req.body;
     const id = data.id;
