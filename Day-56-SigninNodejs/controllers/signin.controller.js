@@ -19,16 +19,17 @@ module.exports = {
     let check = true;
     const token = req.session.tokenUser;
     if(token) {
-      const device = await Device.findOne({
-        where: {
-          token: token,
-        },
-      });
-      if(!device || !device.status) {
-        check = false;
-        req.flash("msg", "Bạn đã bị đăng xuất!");
-      }
-      // console.log("check", check);
+      // const device = await Device.findOne({
+      //   where: {
+      //     token: token,
+      //   },
+      // });
+      // if(!device || !device.status) {
+      //   check = false;
+      //   req.flash("msg", "Bạn đã bị đăng xuất!");
+      // }
+      // // console.log("check", check);
+      check = await req.checkToken(token);
     }
     
     if(!check) {
@@ -45,7 +46,10 @@ module.exports = {
     }
     if (req.session.logIn && check) {
       // checkTokenValidity(req, res, next);
-      const devices = await Device.findAll();
+      // const devices = await Device.findAll();
+      const devices = await Device.findAll({
+        order: [["id", "DESC"]],
+      });
       return res.render("index", { users, moment, devices });
     }
     return res.redirect("/signin");
@@ -162,15 +166,16 @@ module.exports = {
     let check = true;
     const token = req.session.tokenUser;
     if (token) {
-      const device = await Device.findOne({
-        where: {
-          token: token,
-        },
-      });
-      if (!device || !device.status) {
-        check = false;
-      }
+      // const device = await Device.findOne({
+      //   where: {
+      //     token: token,
+      //   },
+      // });
+      // if (!device || !device.status) {
+      //   check = false;
+      // }
       // console.log("check", check);
+      check = await req.checkToken(token);
     }
 
     if (!check) {

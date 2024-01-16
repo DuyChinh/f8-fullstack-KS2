@@ -11,6 +11,7 @@ var favicon = require("serve-favicon");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const validateMidlleware = require("./middleware/validate.middleware");
+const checkTokenMiddleware = require("./middleware/checkToken.middleware");
 
 
 var app = express();
@@ -24,6 +25,7 @@ app.use(
 );
 app.use(flash());
 app.use(validateMidlleware);
+app.use(checkTokenMiddleware);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

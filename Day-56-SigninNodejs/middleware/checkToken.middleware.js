@@ -1,32 +1,26 @@
 // // checkTokenValidity.middleware.js
-// const model = require("../models/index");
-// const Device = model.Device; 
+const model = require("../models/index");
+const Device = model.Device; 
 
-// module.exports = (req, res, next) => {
-//     // const notice = req.flash("notices");
-//     // console.log(notice);
-//     req.checkToken = async(token) => {
-//     //   console.log(req.session.tokenUser);
-//     console.log(token);
-//       const device = await Device.findOne({
-//         where: {
-//           token: token
-//         },
-//       });
-//       if (device && device.status) {
-//         console.log(device);
-//         // if (!device.status) {
-//         // //   req.session.logIn = false;
-//         // //   req.flash("notices", "Bạn đã bị đăng xuất!");
-//         // //   return res.redirect("/signin");
-//         //     return false;
-//         // }
-//         return true;
-//       }
-//       return false;
-//     }
-//     next();
-// }
+module.exports = (req, res, next) => {
+    // const notice = req.flash("notices");
+    // console.log(notice);
+    req.checkToken = async(token) => {
+    //   console.log(req.session.tokenUser);
+    // console.log(token);
+      const device = await Device.findOne({
+        where: {
+          token: token
+        },
+      });
+      if (device && device.status) {
+        // console.log(device);
+        return true;
+      }
+      return false;
+    }
+    next();
+}
 
 // // const checkTokenValidity = async (req, res, next) => {
 // //   const token = req.session.tokenUser; 
@@ -52,29 +46,29 @@
 // // };
 
 
-const checkTokenValidity = async (req, res, next) => {
-  const token = req.session.tokenUser;
-  let check = true;
+// const checkTokenValidity = async (req, res, next) => {
+//   const token = req.session.tokenUser;
+//   let check = true;
 
-  if (token) {
-    const device = await Device.findOne({
-      where: {
-        token: token,
-      },
-    });
+//   if (token) {
+//     const device = await Device.findOne({
+//       where: {
+//         token: token,
+//       },
+//     });
 
-    if (!device || !device.status) {
-      check = false;
-    }
-  }
+//     if (!device || !device.status) {
+//       check = false;
+//     }
+//   }
 
-  req.checkToken = check;
-  next();
-};
+//   req.checkToken = check;
+//   next();
+// };
 
-const checkSessionValidity = (req, res, next) => {
-  if (!req.session.logIn || !req.checkToken) {
-    req.session.logIn = false;
-  }
-  next();
-};
+// const checkSessionValidity = (req, res, next) => {
+//   if (!req.session.logIn || !req.checkToken) {
+//     req.session.logIn = false;
+//   }
+//   next();
+// };

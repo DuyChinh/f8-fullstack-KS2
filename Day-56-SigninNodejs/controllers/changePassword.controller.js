@@ -5,22 +5,24 @@ const model = require("../models/index");
 const User = model.User;
 const Device = model.Device;
 const checkToken = require("../middleware/checkToken.middleware");
-const { where } = require("sequelize");
+// const { where } = require("sequelize");
 module.exports = {
   changePassword: async(req, res) => {
     let check = true;
     const token = req.session.tokenUser;
     if (token) {
-      const device = await Device.findOne({
-        where: {
-          token: token,
-        },
-      });
-      if (!device || !device.status) {
-        check = false;
-      }
+      // const device = await Device.findOne({
+      //   where: {
+      //     token: token,
+      //   },
+      // });
+      // if (!device || !device.status) {
+      //   check = false;
+      // }
       // console.log("check", check);
+      check = await req.checkToken(token);
     }
+    console.log(check);
 
     if (!check) {
       return res.redirect("/");
@@ -60,14 +62,8 @@ module.exports = {
                 },
               }
             );
-            // req.session.logIn = false;
-            //Logout all device
-            // const devices = Device.findAll({
-            //   where: {
-            //     user_id: id
-            //   }
-            // });
             await Device.update({ status: false }, { where: { user_id: id } });
+            req.flash("msg", "Mật khẩu đã bị đổi hãy đăng nhập lại!");
             return res.redirect("/signin");
 
             // req.flash("msg", "Change password successful.");
