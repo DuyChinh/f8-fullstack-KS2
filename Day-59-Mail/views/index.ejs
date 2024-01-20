@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Email</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Email</h1>
+    <a href="/send" class="btn btn-primary mt-2">Send Email</a>
+    <table class="table table-bordered mt-2">
+      <thead>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Send Time</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <% posts.forEach((post) => { %>
+        <tr>
+          <td><%= post.id %></td>
+          <td><%= post.email %></td>
+          <td><%= post.title %></td>
+          <td><%= post.read_status %></td>
+          <td><%= moment(post.send_time).utcOffset(7).format('DD/MM/YYYY HH:mm:ss') %></td>
+          
+          <td>
+            <!-- <a href="/content-detail/" class="btn btn-success">Content Detail</a> -->
+            <form action="/content-detail/<%=post.id %>" method="post">
+              <button class="btn btn-success">Content Detail</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
