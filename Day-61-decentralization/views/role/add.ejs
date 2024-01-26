@@ -1,0 +1,61 @@
+<ul>
+  <li><a href="/">Trang chủ</a></li>
+  <li><a href="/users">Quản lí người dùng</a></li>
+  <li><a href="/role">Quản lí Vai trò</a></li>
+</ul>
+<h1>Thêm Role</h1>
+<form action="" method="post" class="mt-3">
+    <input type="text" class="form-control" name="role" placeholder="Role...">
+    <table class="table table-bordered mt-3">
+        <thead>
+            <th style="width: 18%">Module</th>
+            <th>Quyền</th>
+        </thead>
+        <tbody>
+            <tr>
+              <td>Quản lý User</td>
+              <td class="d-flex align-item-center justify-content-between">
+                <label for="view">
+                  <input type="checkbox" id="view" name="permission" value="user.view" />
+                  Xem
+                </label>
+                <label for="add">
+                  <input type="checkbox" id="add" name="permission" value="user.add" />
+                  Thêm
+                </label>
+                <label for="edit">
+                  <input type="checkbox" id="edit" name="permission" value="user.edit" />
+                  Sửa
+                </label>
+                <label for="del">
+                  <input type="checkbox" id="del" name="permission" value="user.delete" />
+                  Xóa
+                </label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Quản lý Roles</td>
+              <td class="d-flex align-item-center justify-content-between">
+                <label for="role.view">
+                  <input type="checkbox" id="role.view" name="permission" value="role.view" />
+                  Xem
+                </label>
+                <label for="role.add">
+                  <input type="checkbox" id="role.add" name="permission" value="role.add" />
+                  Thêm
+                </label>
+                <label for="role.edit">
+                  <input type="checkbox" id="role.edit" name="permission" value="role.edit" />
+                  Sửa
+                </label>
+                <label for="role.del">
+                  <input type="checkbox" id="role.del" name="permission" value="role.delete" />
+                  Xóa
+                </label>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-info text-white mt-3">Lưu thay đổi</button>
+</form>
