@@ -7,13 +7,21 @@ module.exports = {
   },
 
   register: (req, res) => {
-    return res.render("auth/register");
+    let err="";
+    err = req.flash("error");
+    return res.render("auth/register", { err });
   },
 
   handleRegister: async (req, res) => {
     const { name, email, password, confirmPassword } = req.body;
     const hashPassword = bcrypt.hashSync(password, 10);
+    console.log(name);
+    if(password != confirmPassword) {
+      req.flash("error", "mật khẩu không khớp!");
+      return res.redirect("/auth/register");
+    }
     await User.create({
+      name,
       email,
       password: hashPassword,
       status: true,
