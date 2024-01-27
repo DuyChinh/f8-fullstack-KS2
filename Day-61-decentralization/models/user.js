@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         through: "users_permissions",
         as: "permissions",
       });
-      User.hasOne(models.Phone, {
-        foreignKey: "user_id",
-        as: "phone",
-      });
+      // User.hasOne(models.Phone, {
+      //   foreignKey: "user_id",
+      //   as: "phone",
+      // });
 
       // User.hasOne(models.Role, {
       //   foreignKey: "user_id",

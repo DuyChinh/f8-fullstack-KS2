@@ -5,7 +5,9 @@ module.exports = {
   index: async(req, res) => {
     // const error = req.flash("error");
     const roles = await Role.findAll();
-    return res.render("role/index", { roles });
+  
+    const success = req.flash("success");
+    return res.render("role/index", { roles, success });
   },
 
 //   addRole: async(req, res) => {
@@ -14,7 +16,8 @@ module.exports = {
 //   },
 
   add: (req, res)=> {
-    res.render("role/add");
+    const err = req.flash("error");
+    res.render("role/add", {err});
   },
 
   handleAdd: async(req, res) => {
@@ -22,7 +25,7 @@ module.exports = {
     const name = body.role;
     let permission = body.permission;
     if (!name) {
-    //   req.flash("errName", "Vui lòng nhập trường này!");
+      req.flash("error", "Hãy nhập tên role");
       return res.redirect("/role/add");
     }
 
@@ -31,7 +34,7 @@ module.exports = {
     });
 
     if (role) {
-    //   req.flash("errName", "Role đã tồn tại!");
+      req.flash("error", "Không được bạn ơi. Role đã tồn tại. Hãy đặt tên khác!");
       return res.redirect("/role/add");
     }
 
@@ -41,7 +44,7 @@ module.exports = {
    
     if (!permission) {
         permission = [];
-        // req.flash("success", "Thêm role thành công!");
+        req.flash("success", "Thêm role mới thành công!");
         return res.redirect("/role");
     }
 
@@ -63,18 +66,19 @@ module.exports = {
       const newR = await newRole.addPermission(permissionValue);
     //   console.log(newR);
     }
-    // req.flash("success", "Thêm role thành công!");
+    req.flash("success", "Thêm role mới thành công!");
     return res.redirect("/role");
   },
 
   deleteRole : async(req, res) => {
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
     await Role.destroy({
       where: {
         id: id,
       },
     });
+    req.flash("success", "Delete successful!");
     return res.redirect("/role");
   },
 
@@ -155,6 +159,8 @@ module.exports = {
 
     // console.log("permission Arr", permissionArr);
     const newR = await role.setPermissions(permissionArr);
+    req.flash("success", "Update role successful!");
+
     // console.log("setPermission",newR);
     return res.redirect("/role");
   }

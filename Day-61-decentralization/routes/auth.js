@@ -3,6 +3,10 @@ var express = require('express');
 var router = express.Router();
 const authController = require("../controllers/auth.controller")
 
+router.get("/register", authController.register);
+router.post("/register", authController.handleRegister);
+
+
 router.get("/login", authController.login);
 const passport = require("passport");
 
@@ -25,6 +29,8 @@ router.get("/logout", (req, res) => {
     req.logout((err) => {});
     return res.redirect("/auth/login");
 });
+
+
 
 
 module.exports = router;

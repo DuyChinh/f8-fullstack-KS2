@@ -3,8 +3,8 @@ const { User } = require("../models/index")
 
 module.exports = new GoogleStrategy(
   {
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    // clientID: process.env.CLIENT_ID,
+    // clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback",
     scope: ['profile'],
   },
