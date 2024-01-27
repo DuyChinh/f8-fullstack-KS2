@@ -9,6 +9,7 @@ router.get("/add", roleController.add);
 router.post("/add", roleController.handleAdd);
 
 router.get("/edit/:id", roleController.editRole);
+router.post("/edit/:id", roleController.handleEditRole);
 
 router.post("/delete/:id", roleController.deleteRole);
 

@@ -8,8 +8,13 @@
 </head>
 
 <body>
+<ul>
+    <li><a href="/">Trang chủ</a></li>
+    <li><a href="/users">Quản lí người dùng</a></li>
+    <li><a href="/role">Quản lí Vai trò</a></li>
+</ul>
   <h1>Cập nhật Role</h1>
-  <select class="form-select mb-4" aria-label="Default select example" onchange="redirectToEdit(this)">
+  <select class="mb-3 form-select" onchange="redirectEdit(this)">
     <% roles.forEach((role) => { %>
     <option value="<%= role.id %>" <%= +role.id === +id ? 'selected' : '' %>>
       <a href="/role/edit/<%= role.id %>"><%= role.name %></a>
@@ -19,73 +24,72 @@
   <form action="" method="post">
     <div class="mb-3">
       <label for="">Tên</label>
-      <input type="text" name="name" value="<%= name %>" class="form-control" placeholder="Tên ..." />
+      <input type="text" name="role" value="<%= name %>" class="form-control" placeholder="Tên ..." />
     </div>
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Module</th>
+          <th style="width: 18%;">Module</th>
           <th>Quyền</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Quản lý User</td>
-          <td class="d-flex align-item-center justify-content-between">
+          <td class="d-flex justify-content-between align-item-center">
             <label for="view">
-              <input type="checkbox" id="view" <%= permissions.find(p =>
-                  p.value === 'user.view') ? 'checked' : '' %> name="permission" value="user.view" />
+              <input type="checkbox" id="view" <%= permissions.find((permission) =>
+                  permission.value === 'user.view') ? 'checked' : '' %> name="permission" value="user.view" />
               Xem
             </label>
             <label for="add">
-              <input type="checkbox" id="add" <%= permissions.find(p =>
-                  p.value === 'user.add') ? 'checked' : '' %> name="permission" value="user.add" />
+              <input type="checkbox" id="add" <%= permissions.find((permission) =>
+                  permission.value === 'user.add') ? 'checked' : '' %> name="permission" value="user.add" />
               Thêm
             </label>
             <label for="edit">
-              <input type="checkbox" id="edit" <%= permissions.find(p =>
-                  p.value === 'user.edit') ? 'checked' : '' %> name="permission" value="user.edit" />
+              <input type="checkbox" id="edit" <%= permissions.find((permission) =>
+                  permission.value === 'user.edit') ? 'checked' : '' %> name="permission" value="user.edit" />
               Sửa
             </label>
             <label for="del">
-              <input type="checkbox" id="del" <%= permissions.find(p =>
-                  p.value === 'user.delete') ? 'checked' : '' %> name="permission" value="user.delete" />
+              <input type="checkbox" id="del" <%= permissions.find((permission) =>
+                  permission.value === 'user.delete') ? 'checked' : '' %> name="permission" value="user.delete" />
               Xóa
             </label>
           </td>
         </tr>
         <tr>
           <td>Quản lý Role</td>
-          <td class="d-flex align-item-center justify-content-between">
+          <td class="d-flex justify-content-between align-item-center">
             <label for="role.view">
               <input type="checkbox" id="role.view" name="permission" <%=
-                permissions.find(p => p.value === 'role.view') ? 'checked' : '' %> value="role.view" /> Xem
+                permissions.find((permission) => permission.value === 'role.view') ? 'checked' : '' %> value="role.view" /> Xem
             </label>
             <label for="role.add">
-              <input type="checkbox" id="role.add" <%= permissions.find(p =>
-                p.value === 'role.add') ? 'checked' : '' %> name="permission" value="role.add" /> Thêm
+              <input type="checkbox" id="role.add" <%= permissions.find((permission) =>
+                permission.value === 'role.add') ? 'checked' : '' %> name="permission" value="role.add" /> Thêm
             </label>
             <label for="role.edit">
-              <input type="checkbox" id="role.edit" <%= permissions.find(p =>
-                p.value === 'role.edit') ? 'checked' : '' %> name="permission" value="role.edit" /> Sửa
+              <input type="checkbox" id="role.edit" <%= permissions.find((permission) =>
+                permission.value === 'role.edit') ? 'checked' : '' %> name="permission" value="role.edit" /> Sửa
             </label>
             <label for="role.del">
-              <input type="checkbox" id="role.del" <%= permissions.find(p =>
-                p.value === 'role.delete') ? 'checked' : '' %> name="permission" value="role.delete" /> Xóa
+              <input type="checkbox" id="role.del" <%= permissions.find((permission) =>
+                permission.value === 'role.delete') ? 'checked' : '' %> name="permission" value="role.delete" /> Xóa
             </label>
           </td>
         </tr>
       </tbody>
     </table>
-    <a href="/role" class="btn btn-danger">Hủy</a>
-    <button type="submit" class="btn btn-success">Lưu</button>
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
   </form>
 </body>
 <script>
-  function redirectToEdit(select) {
-    const selectedValue = select.value;
-    if (selectedValue) {
-      window.location.href = `/role/edit/${selectedValue}`;
+  const redirectEdit = (link) => {
+    const linkEdit = link.value;
+    if (linkEdit) {
+      window.location.href = `/role/edit/${linkEdit}`;
     }
   }
 </script>
