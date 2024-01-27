@@ -35,13 +35,10 @@ module.exports = {
       return res.redirect("/role/add");
     }
 
-    try {
-      const newRole = await Role.create({
-          name,
-      });
-    } catch {
-      throw(error);
-    }
+    const newRole = await Role.create({
+        name,
+    });
+   
     if (!permission) {
         permission = [];
         // req.flash("success", "Thêm role thành công!");
@@ -127,10 +124,10 @@ module.exports = {
     try {
 
       await Role.update(
-        { name },
+        { name: name },
         {
           where : {
-            id
+            id: id,
           }
         }
       )

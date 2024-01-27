@@ -15,6 +15,10 @@ router.get("/", userController.index);
 router.get("/add", userController.add);
 router.post("/add", userController.handleAdd);
 
+router.get("/permission/:id", userController.addPermission);
+router.post("/permission/:id", userController.handleAddPermission);
+
+
 router.get("/edit/:id", userController.edit);
 router.post("/edit/:id", userController.handleEdit);
 router.post("/delete/:id", userController.delete);

@@ -4,6 +4,7 @@ const User = model.User;
 const Phone = model.Phone;
 const Post = model.Post;
 const Course = model.Course;
+const Role = model.Role;
 
 const { Op } = require("sequelize");
 const phone = require("../models/phone");
@@ -181,5 +182,41 @@ module.exports = {
       /*xóa vĩnh viễn */
     });
     res.redirect("/users");
+  },
+
+  addPermission: async(req, res) => {
+    const id = req.params.id;
+    const user = await User.findByPk(id, {
+      include: [
+        {
+          model: Role,
+          as: "roles",
+        },
+      ],
+    });
+    const userRoles = user.roles;
+    const roles = await Role.findAll();
+    res.render("users/permission", { roles, userRoles });
+  }, 
+
+  handleAddPermission: async(req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    let roles = body.role;
+    console.log("roles", roles);
+    if(!roles) {
+      roles=[];
+    }
+    if(!Array.isArray(roles)) {
+      roles = [roles];
+    }
+    const user = await User.findByPk(id);
+    let roleArr =[];
+    for(role of roles) {
+      const newRole = await Role.findByPk(role);
+      roleArr.push(newRole);
+    }
+    user.setRoles(roleArr);
+    return res.redirect("/users");
   }
 };
