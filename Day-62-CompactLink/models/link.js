@@ -25,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
 
+      secure: DataTypes.BOOLEAN,
+
       created_at: {
         type: DataTypes.DATE(),
         // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
@@ -33,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE(),
         // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
       },
+      code: {
+        type: DataTypes.STRING,
+      }
     },
     {
       sequelize,

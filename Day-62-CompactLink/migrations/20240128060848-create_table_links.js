@@ -16,6 +16,16 @@ module.exports = {
         autoIncrement: true,
       },
 
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "users",
+          },
+          key: "id",
+        }
+      },
+
       root_link: {
         type: Sequelize.STRING,
       },
@@ -30,6 +40,16 @@ module.exports = {
 
       view: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+
+      secure: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+
+      code: {
+        type: Sequelize.STRING,
       },
 
       created_at: {

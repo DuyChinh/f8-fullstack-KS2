@@ -1,1 +1,117 @@
-<h1>Rút gọn liên kết</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rút gọn liên kết</h1>
+    <p>Công cụ rút ngắn nhanh nhất, free</p>
+
+    <%- success.length ? `<div class="alert alert-success">${success}</div>`: "" %>
+    <div class="row">
+      <div class="col-8 table-responsive">
+        <table class="table table-bordered table-striped table-responsive" style="font-size: 12px;">
+          <thead>
+            <th>STT</th>
+            <th>Liên kết rút gọn</th>
+            <th>Liên kết gốc</th>
+            <th>Mật khẩu</th>
+            <th>Lượt truy cập</th>
+            <th>Thời gian tạo</th>
+            <th>Hành động</th>
+          </thead>
+          <tbody>
+            <% links.forEach((link, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td>
+                <% if (!link.secure) { %>
+                    <a href="<%= link.compact_link %>" target="_blank" onclick="redirectRoot('<%= link.root_link %>')"><%= link.compact_link %></a>
+                <% } else { %>
+                    <a href="/<%= link.code %>" target="_blank"><%= link.compact_link %></a>
+                <% } %>
+              </td>
+              <td>
+                <a href="<%= link.root_link %>" target="_blank"><%= link.root_link %></a>
+              </td>
+              <td>
+                <% if (link.password) { %>
+                <button onclick="showPassword('<%= link.password %>')" class="btn btn-outline-info">Xem</button>
+                <% } else { %>
+                <span>No password</span>
+                <% } %>
+              </td>
+              <td><%= link.view %></td>
+              <td><%= moment(link.created_at).fromNow() %></td>
+              <td>
+                <button class="btn btn-warning">Sửa</button>
+                <form action="/link/delete/<%=link.id %>" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa liên kết này?')">
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-4">
+        <form action="" method="post" style="padding: 15px; border: 1px solid #ccc; border-radius: 5px">
+          <div class="mb-3">
+            <label for="form-label">Liên kết mục tiêu</label>
+            <input type="text" name="root_link" class="form-control" placeholder="Liên kết mục tiêu..." required>
+          </div>
+
+          <div class="mb-3">
+            <label for="">Liên kết rút gọn</label>
+            <input type="text" name="link" class="form-control" placeholder="Liên kết rút gọn...">
+          </div>
+
+          <div class="mb-3">
+            <label for="">Mật khẩu</label>
+            <input type="text" name="password" class="form-control" placeholder="Mật khẩu...">
+          </div>
+
+          <label for="myCheckbox" class="form-check-label ml-2">
+            <input type="checkbox" id="myCheckbox" name="safe_navigation" class="form-check-input">
+            Chuyển hướng an toàn
+          </label>
+
+          <label for="Checkbox" class="form-check-label ml-2">
+            <input type="checkbox" id="Checkbox" name="check_id" class="form-check-input" onclick="showInput()">
+            Tùy chỉnh liên kết
+          </label>
+          <input type="text" id="customLinkInput" class="form-control mt-1" name="new_link" style="display: none;" value="<%= defaultLink %>/" onkeydown="return event.key !== 'Delete' && event.key !== 'Backspace';">
+          <%- err.length ? `<p class="mt-1" style="color: red">${err}</p> `: "" %>
+
+          <button class="btn btn-info text-white mt-3" style="width: 100%">Rút gọn</button>
+        </form>
+      </div>
+    </div>
+    <script>
+       
+        function showPassword(password) {
+            alert("Mật khẩu: " + password);
+        }
+
+        async function redirectRoot(rootLink) {
+            window.open(rootLink); 
+        }
+
+        
+        function showInput() {
+            var checkbox = document.getElementById("Checkbox");
+            var input = document.getElementById("customLinkInput");
+
+            if (checkbox.checked) {
+            input.style.display = "block";
+            } else {
+            input.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
