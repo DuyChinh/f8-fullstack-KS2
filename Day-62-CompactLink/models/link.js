@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      user_id: DataTypes.INTEGER,
       root_link: DataTypes.STRING,
       compact_link: DataTypes.STRING,
       password: {

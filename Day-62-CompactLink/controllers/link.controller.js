@@ -10,9 +10,14 @@ const Facebook = require("facebook-node-sdk");
 
 module.exports = {
   index: async (req, res) => {
+    const { id } = req.user;
+    const user_id = id;
     // const links = await Link.findAll();
     const links = await Link.findAll({
       order: [["created_at", "DESC"]],
+      where: {
+        user_id,
+      }
     });
     const success = req.flash("success");
     const defaultLink = req.headers.host;
@@ -49,7 +54,13 @@ module.exports = {
       secure = true;
     }
 
+    // console.log("handlecCompact", req.user);
+    const { id } = req.user;
+    const user_id = id;
+    // console.log("user_id", user_id);
+
     await Link.create({
+      user_id,
       root_link,
       compact_link: shortLink,
       password,

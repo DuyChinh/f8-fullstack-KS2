@@ -3,7 +3,7 @@ module.exports = async(req, res, next) => {
     const pathName = req.baseUrl + req.path;
     // const src = req.headers.host + pathName;
     const code = pathName.split("/")[1];
-    console.log("code", code);
+    // console.log("code", code);
     const link = await Link.findOne({
         where: {
             code,
