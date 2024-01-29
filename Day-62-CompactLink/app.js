@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var favicon = require("serve-favicon");
 var logger = require('morgan');
 const expressLayouts = require("express-ejs-layouts")
 var session = require("express-session");
@@ -20,6 +21,8 @@ const authMiddleware = require("./middlewares/auth.middleware");
 const guestMiddleware = require("./middlewares/guest.middleware");
 
 var app = express();
+
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 app.use(
   session({

@@ -2,12 +2,14 @@ var express = require('express');
 const sendMail = require('../utils/mail');
 var router = express.Router();
 const linkController = require("../controllers/link.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { req });
 });
 
+router.get("/:id/qrcode", linkController.generateQr);
 router.get("/:id", linkController.redirect);
 router.post("/:id", linkController.checkPassword);
 

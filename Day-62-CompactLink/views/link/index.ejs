@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <h1>Rút gọn liên kết</h1>
     <p>Công cụ rút ngắn nhanh nhất, free</p>
 
-    <%- success.length ? `<div class="alert alert-success">${success}</div>`: "" %>
+    <%- success.length ? `<div class="alert alert-success col-6">${success}</div>`: "" %>
     <div class="row">
       <div class="col-8 table-responsive">
         <table class="table table-bordered table-striped table-responsive" style="font-size: 12px;">
@@ -18,8 +20,8 @@
             <th>Liên kết rút gọn</th>
             <th>Liên kết gốc</th>
             <th>Mật khẩu</th>
-            <th>Lượt truy cập</th>
-            <th>Thời gian tạo</th>
+            <th style="width: 5%">Lượt truy cập</th>
+            <th style="width: 15%">Thời gian tạo</th>
             <th>Hành động</th>
           </thead>
           <tbody>
@@ -34,7 +36,7 @@
                 <% } %>
               </td>
               <td>
-                <a href="<%= link.root_link %>" target="_blank"><%= link.root_link %></a>
+                <a href="<%= link.root_link %>" target="_blank"><%= link.root_link.split("/")[2] %></a>
               </td>
               <td>
                 <% if (link.password) { %>
@@ -44,11 +46,16 @@
                 <% } %>
               </td>
               <td><%= link.view %></td>
-              <td><%= moment(link.created_at).fromNow() %></td>
-              <td>
-                <button class="btn btn-warning">Sửa</button>
+              <td style="width: 50px"><%= moment(link.created_at).fromNow() %></td>
+              <td class="d-flex align-items-center gap-1">
+                <a href="/link/edit/<%= link.code %>" class="btn btn-warning">
+                  <i class="fa-solid fa-pen-to-square"></i></a>
+                <button onclick="openNewWindow('<%= link.compact_link %>')" class="btn btn-success">
+                  <i class="fa-solid fa-share-from-square"></i>
+                </button>
+
                 <form action="/link/delete/<%=link.id %>" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa liên kết này?')">
-                    <button type="submit" class="btn btn-danger">Xóa</button>
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                 </form>
               </td>
             </tr>
@@ -95,7 +102,7 @@
             alert("Mật khẩu: " + password);
         }
 
-        async function redirectRoot(rootLink) {
+        function redirectRoot(rootLink) {
             window.open(rootLink); 
         }
 
@@ -109,6 +116,31 @@
             } else {
             input.style.display = "none";
             }
+        }
+
+        function openNewWindow(src) {
+          var windowName = "ShareWindow";
+          const url = "https://www.facebook.com/sharer/sharer.php?u=" + src;
+          var windowWidth = calculateWindowWidth();
+          var windowHeight = window.innerHeight;
+          var windowFeatures = "width=" + windowWidth + ",height=" + windowHeight + ",left=" + calculateLeftPosition(windowWidth) + ",top=" + calculateTopPosition(windowHeight);
+
+          window.open(url, windowName, windowFeatures);
+        }
+
+        function calculateWindowWidth() {
+          var screenWidth = window.screen.width;
+          return Math.round(screenWidth * 0.4);
+        }
+
+        function calculateLeftPosition(windowWidth) {
+          var screenWidth = window.screen.width;
+          return (screenWidth - windowWidth) / 2;
+        }
+
+        function calculateTopPosition(windowHeight) {
+          var screenHeight = window.screen.height;
+          return (screenHeight - windowHeight) / 2;
         }
     </script>
 

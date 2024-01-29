@@ -7,7 +7,11 @@ router.post("/compactLink", linkController.handleCompact);
 
 router.post("/delete/:id", linkController.delete);
 
-router.get("/:id/qrcode", linkController.generateQr);
+
+
+router.get("/edit/:id", linkController.edit);
+router.post("/edit/:id", linkController.handleEdit);
+// router.get("/shareFb/:id", linkController.share);
 
 
 // router.get("/secure", linkController.redirect);

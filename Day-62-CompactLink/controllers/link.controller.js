@@ -6,9 +6,14 @@ const { User, Link } = require("../models/index");
 const shortid = require("shortid");
 const moment = require("moment");
 const { where } = require("sequelize");
+const Facebook = require("facebook-node-sdk");
+
 module.exports = {
   index: async (req, res) => {
-    const links = await Link.findAll();
+    // const links = await Link.findAll();
+    const links = await Link.findAll({
+      order: [["created_at", "DESC"]],
+    });
     const success = req.flash("success");
     const defaultLink = req.headers.host;
     const err = req.flash("err");
@@ -66,16 +71,23 @@ module.exports = {
 
   redirect: async(req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     if (id !== "favicon.ico") {
       const link = await Link.findOne({ where: { code: id } });
-    //   console.log(link.view);
       const view = link.view + 1;
-      await Link.update({view}, {
+      await Link.update(
+        { view },
+        {
           where: {
-              code : id,
-          }
-      });
+            code: id,
+          },
+        }
+      );
+      if(!link.password) {
+        return res.render("link/action", { link });
+      }
+    //   console.log(link.view);
+      
     }
     
     const error = req.flash("error");
@@ -83,19 +95,19 @@ module.exports = {
   },
 
   checkPassword: async (req, res) => {
-    const { password } = req.body;
     const { id } = req.params;
-
     const link = await Link.findOne({
       where: {
         code: id,
       },
     });
+   
+    const { password } = req.body;
     // console.log(link);
     if (link.password === password) {
       // console.log("vào");
       const rootLink = link.root_link;
-      return res.render("link/action", { rootLink, link });
+      return res.render("link/action", { rootLink, link, req });
     }
     req.flash("error", "Sai mật khẩu!");
     return res.redirect(req.get("referer"));
@@ -110,5 +122,76 @@ module.exports = {
     // console.log(qr);
     // img = `<image src= " `+qr+ `" />`
     return res.render("link/qr", { qr });
+  },
+
+  // share: (req, res) => {
+  //   const facebook = new Facebook({
+  //     appId: "921335576185502",
+  //     secret: "c488740c7fab46195fe9c30598dae9ce",
+  //   });
+
+  //   facebook.setAccessToken(
+  //     "EAANF8ye8yp4BO7U7uviy656pKlTmKtT3nZB4NwXZCR3wBERVRZAapWhtbWVHWgFlp9T0auHHHq2dlkhUkFJaf5AJxHDQxDEVPbvgfYi7VkroXQpGyM5hEGXqs02nZCWRifdxTiorkkPuCxb42HU4CNSXESp9yTAZBy6KXgJGtnkmF811Uf7JPBrPA"
+  //   );
+
+  //   const body = "Nội dung bài viết của bạn";
+  //   facebook.api(
+  //     "/me/feed",
+  //     "POST",
+  //     { message: body },
+  //     function (res) {
+  //       if (!res || res.error) {
+  //         console.log(!res ? "Lỗi xảy ra" : res.error);
+  //         return;
+  //       }
+  //       console.log(res);
+  //       console.log("ID bài viết: " + res.id);
+  //     }
+  //   );
+
+  //   // facebook.api(
+  //   //   `https://www.facebook.com/doanchinhit2102/feed`,
+  //   //   "post",
+  //   //   { message: "Hello, world!" },
+  //   //   function (res) {
+  //   //     if (!res || res.error) {
+  //   //       console.log(!res ? "error occurred" : res.error);
+  //   //       return;
+  //   //     }
+  //   //     console.log("Post Id: " + res.id);
+  //   //   }
+  //   // );
+  // }
+
+  edit: async(req, res) => {
+    const { id } = req.params;
+    const links = await Link.findAll({order: [["created_at", "desc"]]});
+    const linkEdit = await Link.findOne({
+      where: {
+        code: id,
+      },
+    });
+
+    const success = req.flash("success");
+    const defaultLink = req.headers.host;
+    const err = req.flash("err");
+    res.render("link/edit", { success, links, moment, defaultLink, err, linkEdit });
+  },
+
+  handleEdit: async(req, res) => {
+    const { id } = req.params;
+    const { short_link, password } = req.body;
+    // console.log(short_link);
+    await Link.update(
+      { password },
+      {
+        where: {
+          code: id,
+        },
+      }
+    );
+    req.flash("success", "Cập nhật mật khẩu thành công!")
+    return res.redirect("/link/compactLink");
   }
+ 
 };
